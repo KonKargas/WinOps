@@ -42,22 +42,41 @@ WinOps Manager provides a browser-based interface to common Windows administrati
 
 ## Screenshots
 
-Screenshots will be added to the [`screenshots/`](screenshots/) directory.
-
-<!-- Add images here after uploading them, for example:
 ### Policies
+
+Browse and configure supported local Windows Group Policy settings.
+
 ![Policies page](screenshots/policies.png)
+
 ### Users
+
+Manage local Windows user accounts and account settings.
+
 ![Users page](screenshots/users.png)
+
 ### System
+
+View hardware and system information, power options, and system utilities.
+
 ![System page](screenshots/system.png)
+
 ### Network
+
+Inspect and manage network adapters, IP settings, and diagnostics.
+
 ![Network page](screenshots/network.png)
+
 ### Software
+
+Manage installed software and Windows Package Manager operations.
+
 ![Software page](screenshots/software.png)
+
 ### Maintenance
+
+Access system maintenance, health-check, and troubleshooting tools.
+
 ![Maintenance page](screenshots/maintenance.png)
--->
 
 ## Technology stack
 
@@ -108,7 +127,7 @@ For operations requiring elevated privileges, start the terminal **as Administra
 ```text
 WinOps/
 ├── .mvn/wrapper/                   # Maven Wrapper configuration
-├── screenshots/                    # Screenshots (add yours here)
+├── screenshots/                    # Application screenshots
 ├── src/
 │   ├── main/
 │   │   ├── java/com/kkargas/gpm/
@@ -143,9 +162,10 @@ The core dashboard modules are implemented. Windows behavior depends on OS editi
 ## Author
 
 **Konstantinos Kargas**  
-Full-Stack Software Engineer  
-Website: [kkargas.com](https://kkargas.com)  
-GitHub: [@KonKargas](https://github.com/KonKargas)
+Full-Stack Software Engineer
+
+- Website: [kkargas.com](https://kkargas.com)
+- GitHub: [KonKargas](https://github.com/KonKargas)
 
 ## Third-party tools
 
