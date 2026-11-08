@@ -1,0 +1,28 @@
+{
+  "category": "Storage & File System",
+  "description": "Conservative storage policies; no automatic cleanup, disk indexing shutdown or scheduled scans.",
+  "policies": [
+    {
+      "id": "encrypted-indexing-off",
+      "name": "Do Not Index Encrypted Files",
+      "description": "Prevents Windows Search from indexing encrypted files, reducing exposure of sensitive content. Does not disable general indexing.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\Windows Search",
+      "registryValue": "AllowIndexingEncryptedStoresOrItems",
+      "registryType": "REG_DWORD",
+      "enabledValue": "0"
+    },
+    {
+      "id": "network-thumbs-db-off",
+      "name": "Disable Thumbnail Cache on Network Folders",
+      "description": "Prevents creation of hidden thumbs.db thumbnail cache files on network folders; can slightly slow thumbnail display.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\Explorer",
+      "registryValue": "DisableThumbsDBOnNetworkFolders",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    }
+  ]
+}

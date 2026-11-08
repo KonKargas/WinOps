@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+            <!-- =====================================================
+                 WINGET NOT AVAILABLE
+                 ===================================================== -->
+
+            <div class="software-warning"
+                 th:if="${!wingetAvailable}">
+
+                <div>
+
+                    <strong>
+                        Windows Package Manager is not available
+                    </strong>
+
+                    <span>
+                        WinOps Manager could not detect WinGet
+                        on this computer. Software management
+                        features are currently unavailable.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 OVERVIEW
+                 ===================================================== -->
+
+            <section class="software-overview">
+
+
+                <!-- INSTALLED -->
+
+                <div class="software-stat-card">
+
+                    <span class="software-stat-label">
+                        Installed Applications
+                    </span>
+
+                    <strong th:text="${installedCount}">
+                        0
+                    </strong>
+
+                    <small>
+                        Detected by WinGet
+                    </small>
+
+                </div>
+
+
+                <!-- UPDATES -->
+
+                <div class="software-stat-card">
+
+                    <span class="software-stat-label">
+                        Available Updates
+                    </span>
+
+                    <strong th:text="${updateCount}">
+                        0
+                    </strong>
+
+                    <small>
+                        Packages with newer versions
+                    </small>
+
+                </div>
+
+
+                <!-- WINGET -->
+
+                <div class="software-stat-card">
+
+                    <span class="software-stat-label">
+                        WinGet
+                    </span>
+
+                    <div class="software-status-value">
+
+                        <span class="software-status-dot"
+                              th:classappend="${wingetAvailable}
+                                    ? ' software-status-online'
+                                    : ' software-status-offline'">
+                        </span>
+
+                        <strong th:text="${wingetAvailable
+                                ? 'Available'
+                                : 'Unavailable'}">
+                            Available
+                        </strong>
+
+                    </div>
+
+                    <small th:text="${wingetVersion}">
+                        v1.0.0
+                    </small>
+
+                </div>
+
+
+                <!-- SOURCES -->
+
+                <div class="software-stat-card">
+
+                    <span class="software-stat-label">
+                        Package Sources
+                    </span>
+
+                    <strong th:text="${sourceCount}">
+                        0
+                    </strong>
+
+                    <small>
+                        Configured WinGet sources
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 MAIN GRID
+                 ===================================================== -->
+
+            <div class="software-grid">
+
+
+                <!-- =================================================
+                     LEFT COLUMN
+                     ================================================= -->
+
+                <div class="software-column software-main-column">
+
+
+                    <!-- =============================================
+                         INSTALLED APPLICATIONS
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+
+                            <div>
+
+                                <span class="page-label">
+                                    APPLICATIONS
+                                </span>
+
+                                <h2>
+                                    Installed Applications
+                                </h2>
+
+                                <p>
+                                    Applications detected by
+                                    Windows Package Manager.
+                                </p>
+
+                            </div>
+
+
+                            <div class="software-application-count">
+
+                                <strong th:text="${installedCount}">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Applications
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="software-card-content">
+
+
+                            <!-- SEARCH -->
+
+                            <div class="software-search-bar">
+
+                                <input type="text"
+                                       id="softwareSearch"
+                                       class="software-search-input"
+                                       placeholder="Search installed applications..."
+                                       autocomplete="off"
+                                       oninput="filterApplications()">
+
+                            </div>
+
+
+                            <!-- EMPTY -->
+
+                            <div class="software-empty-state"
+                                 th:if="${#lists.isEmpty(installedApplications)}">
+
+                                <strong>
+                                    No applications found
+                                </strong>
+
+                                <span th:if="${wingetAvailable}">
+                                    WinGet did not return any
+                                    installed applications.
+                                </span>
+
+                                <span th:unless="${wingetAvailable}">
+                                    WinGet is not available
+                                    on this computer.
+                                </span>
+
+                            </div>
+
+
+                            <!-- TABLE -->
+
+                            <div class="software-table-wrapper"
+                                 th:if="${!#lists.isEmpty(installedApplications)}">
+
+                                <table class="software-table"
+                                       id="installedApplicationsTable">
+
+                                    <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Application
+                                        </th>
+
+                                        <th>
+                                            Package ID
+                                        </th>
+
+                                        <th>
+                                            Version
+                                        </th>
+
+                                        <th>
+                                            Available
+                                        </th>
+
+                                        <th>
+                                            Source
+                                        </th>
+
+                                        <th class="software-actions-column">
+                                            Actions
+                                        </th>
+
+                                    </tr>
+
+                                    </thead>
+
+
+                                    <tbody>
+
+										<tr th:each="app : ${installedApplications}"
+                                            class="software-installed-row"
+                                            th:attr="data-package-id=${app.id}">
+										
+										    <td>
+										
+										        <div class="software-name-cell">
+										
+										            <strong th:text="${app.name}">
+										                Application
+										            </strong>
+										
+										        </div>
+										
+										    </td>
+										
+										
+										    <td>
+										
+										        <span class="software-package-id"
+										              th:text="${app.id}">
+										            Package.Id
+										        </span>
+										
+										    </td>
+										
+										
+										    <td th:text="${app.version}">
+										        1.0.0
+										    </td>
+										
+										
+										    <td>
+										
+										        <span th:if="${app.updateAvailable}"
+										              class="software-update-version"
+										              th:text="${app.availableVersion}">
+										            2.0.0
+										        </span>
+										
+										        <span th:unless="${app.updateAvailable}"
+										              class="software-current-version">
+										            —
+										        </span>
+										
+										    </td>
+										
+										
+										    <td>
+										
+										        <span class="software-source-badge"
+										              th:text="${app.source != null
+										                    and !app.source.isBlank()
+										                    ? app.source
+										                    : 'Unknown'}">
+										            winget
+										        </span>
+										
+										    </td>
+
+                                            <td class="software-actions-column">
+
+                                                <div class="software-row-actions">
+
+                                                    <div class="software-update-action"
+                                                         th:if="${app.updateAvailable}">
+
+                                                        <button type="button"
+                                                                class="software-update-button"
+                                                                th:attr="data-package-id=${app.id},data-package-name=${app.name}"
+                                                                onclick="startSoftwareUpdate(this)">
+                                                            Update
+                                                        </button>
+
+                                                        <div class="software-update-progress">
+
+                                                            <div class="software-update-progress-header">
+
+                                                                <span class="software-update-message">
+                                                                    Preparing update...
+                                                                </span>
+
+                                                                <span class="software-progress-spinner"></span>
+
+                                                            </div>
+
+                                                            <div class="software-progress-track">
+                                                                <div class="software-update-progress-bar"></div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="software-update-result"></div>
+
+                                                    </div>
+
+                                                    <div class="software-uninstall-action">
+
+                                                        <button type="button"
+                                                                class="software-uninstall-button"
+                                                                th:attr="data-package-id=${app.id},data-package-name=${app.name}"
+                                                                onclick="startSoftwareUninstallation(this)">
+                                                            Uninstall
+                                                        </button>
+
+                                                        <div class="software-uninstall-progress">
+
+                                                            <div class="software-uninstall-progress-header">
+
+                                                                <span class="software-uninstall-message">
+                                                                    Preparing removal...
+                                                                </span>
+
+                                                                <span class="software-progress-spinner"></span>
+
+                                                            </div>
+
+                                                            <div class="software-progress-track">
+                                                                <div class="software-uninstall-progress-bar"></div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="software-uninstall-result"></div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+										
+										</tr>
+										
+										</tbody>
+
+                                </table>
+
+
+                                <!-- SEARCH EMPTY -->
+
+                                <div id="softwareSearchEmpty"
+                                     class="software-search-empty">
+
+                                    No applications match your search.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =============================================
+                         APPLICATION INSTALLATION
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+                            <div>
+                                <span class="page-label">INSTALLATION</span>
+                                <h2>Application Installation</h2>
+                                <p>Install trusted workstation applications through Windows Package Manager.</p>
+                            </div>
+                        </div>
+
+                        <div class="software-card-content">
+
+                            <div class="software-empty-state"
+                                 th:if="${#lists.isEmpty(softwareCatalog)}">
+                                <strong>Application catalog unavailable</strong>
+                                <span>WinGet must be available to install software through WinOps Manager.</span>
+                            </div>
+
+                            <div class="software-catalog"
+                                 th:if="${!#lists.isEmpty(softwareCatalog)}">
+
+                                <div class="software-catalog-row"
+                                     th:each="pkg : ${softwareCatalog}"
+                                     th:attr="data-package-id=${pkg.id}">
+
+                                    <div class="software-catalog-information">
+                                        <div class="software-catalog-title">
+                                            <strong th:text="${pkg.name}">Application</strong>
+                                            <span class="software-category-badge"
+                                                  th:text="${pkg.category}">Category</span>
+                                        </div>
+                                        <span th:text="${pkg.description}">Description</span>
+                                        <small th:text="${pkg.id}">Package.Id</small>
+                                    </div>
+
+                                    <div class="software-install-action">
+
+                                        <div th:if="${pkg.installed}"
+                                             class="software-installed-state">
+                                            <span>Installed</span>
+                                        </div>
+
+                                        <button th:unless="${pkg.installed}"
+                                                type="button"
+                                                class="button-primary software-install-button"
+                                                th:attr="data-package-id=${pkg.id},data-package-name=${pkg.name}"
+                                                onclick="startSoftwareInstallation(this)">
+                                            Install
+                                        </button>
+
+                                        <div class="software-install-progress"
+                                             th:unless="${pkg.installed}">
+                                            <div class="software-progress-header">
+                                                <span class="software-progress-message">
+                                                    Preparing installation...
+                                                </span>
+                                                <span class="software-progress-spinner"></span>
+                                            </div>
+                                            <div class="software-progress-track">
+                                                <div class="software-progress-bar"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="software-install-result"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+
+                <!-- =================================================
+                     RIGHT COLUMN
+                     ================================================= -->
+
+                <div class="software-column software-side-column">
+
+
+                    <!-- =============================================
+                         WINGET INFORMATION
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+
+                            <div>
+
+                                <span class="page-label">
+                                    PACKAGE MANAGER
+                                </span>
+
+                                <h2>
+                                    WinGet Information
+                                </h2>
+
+                                <p>
+                                    Windows Package Manager
+                                    status and configuration.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="software-card-content">
+
+
+                            <div class="software-info-row">
+
+                                <div>
+
+                                    <strong>
+                                        Status
+                                    </strong>
+
+                                    <span>
+                                        Package manager availability
+                                    </span>
+
+                                </div>
+
+                                <span class="software-info-value"
+                                      th:text="${wingetAvailable
+                                            ? 'Available'
+                                            : 'Unavailable'}">
+                                    Available
+                                </span>
+
+                            </div>
+
+
+                            <div class="software-info-row">
+
+                                <div>
+
+                                    <strong>
+                                        Version
+                                    </strong>
+
+                                    <span>
+                                        Installed WinGet version
+                                    </span>
+
+                                </div>
+
+                                <span class="software-info-value"
+                                      th:text="${wingetVersion}">
+                                    Unknown
+                                </span>
+
+                            </div>
+
+
+                            <div class="software-info-row">
+
+                                <div>
+
+                                    <strong>
+                                        Installed Packages
+                                    </strong>
+
+                                    <span>
+                                        Applications currently detected
+                                    </span>
+
+                                </div>
+
+                                <span class="software-info-value"
+                                      th:text="${installedCount}">
+                                    0
+                                </span>
+
+                            </div>
+
+
+                            <div class="software-info-row">
+
+                                <div>
+
+                                    <strong>
+                                        Updates
+                                    </strong>
+
+                                    <span>
+                                        Packages with updates available
+                                    </span>
+
+                                </div>
+
+                                <span class="software-info-value"
+                                      th:text="${updateCount}">
+                                    0
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =============================================
+                         PACKAGE SOURCES
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+
+                            <div>
+
+                                <span class="page-label">
+                                    SOURCES
+                                </span>
+
+                                <h2>
+                                    Package Sources
+                                </h2>
+
+                                <p>
+                                    WinGet package repositories
+                                    configured on this computer.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="software-card-content">
+
+
+                            <div class="software-empty-small"
+                                 th:if="${#lists.isEmpty(wingetSources)}">
+
+                                No package sources detected.
+
+                            </div>
+
+
+                            <div class="software-source-row"
+                                 th:each="source : ${wingetSources}">
+
+                                <div class="software-source-icon">
+                                    S
+                                </div>
+
+                                <div>
+
+                                    <strong th:text="${source}">
+                                        winget
+                                    </strong>
+
+                                    <span>
+                                        Package source
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =============================================
+                         SOFTWARE UPDATES
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+
+                            <div>
+
+                                <span class="page-label">
+                                    UPDATES
+                                </span>
+
+                                <h2>
+                                    Software Updates
+                                </h2>
+
+                                <p>
+                                    Update applications with newer versions
+                                    detected by Windows Package Manager.
+                                </p>
+
+                            </div>
+
+                            <div class="software-application-count">
+
+                                <strong th:text="${updateCount}">
+                                    0
+                                </strong>
+
+                                <span>
+                                    Available
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="software-card-content">
+
+                            <div class="software-update-all-panel"
+                                 th:if="${updateCount > 0}">
+
+                                <div class="software-update-all-information">
+
+                                    <strong>
+                                        Update all applications
+                                    </strong>
+
+                                    <span>
+                                        Install every available application update detected by WinGet.
+                                    </span>
+
+                                </div>
+
+                                <div class="software-update-all-action">
+
+                                    <button type="button"
+                                            class="button-primary software-update-all-button"
+                                            onclick="startSoftwareUpdateAll(this)">
+                                        Update All
+                                    </button>
+
+                                    <div class="software-update-all-progress">
+
+                                        <div class="software-update-progress-header">
+
+                                            <span class="software-update-all-message">
+                                                Preparing all updates...
+                                            </span>
+
+                                            <span class="software-progress-spinner"></span>
+
+                                        </div>
+
+                                        <div class="software-progress-track">
+                                            <div class="software-update-progress-bar"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="software-update-all-result"></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="software-update-empty"
+                                 th:unless="${updateCount > 0}">
+
+                                <strong>
+                                    You're up to date
+                                </strong>
+
+                                <span>
+                                    WinGet did not detect any application updates.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =============================================
+                         PACKAGE TOOLS
+                         ============================================= -->
+
+                    <section class="software-card">
+
+                        <div class="software-card-header">
+
+                            <div>
+
+                                <span class="page-label">
+                                    TOOLS
+                                </span>
+
+                                <h2>
+                                    Package Tools
+                                </h2>
+
+                                <p>
+                                    Common Windows software
+                                    management utilities.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="software-card-content">
+						
+						    <div class="software-tool-row">
+						
+						        <div class="software-tool-information">
+						
+						            <strong>
+						                Refresh WinGet Sources
+						            </strong>
+						
+						            <span>
+						                Update package source information used by
+						                Windows Package Manager.
+						            </span>
+						
+						        </div>
+						
+						        <div class="software-tool-action">
+						
+						            <button type="button"
+						                    class="button-primary software-tool-button"
+						                    onclick="refreshWingetSources(this)">
+						                Refresh
+						            </button>
+						
+						            <div class="software-tool-progress">
+						
+						                <div class="software-tool-progress-header">
+						
+						                    <span class="software-tool-message">
+						                        Refreshing sources...
+						                    </span>
+						
+						                    <span class="software-progress-spinner"></span>
+						
+						                </div>
+						
+						                <div class="software-progress-track">
+						                    <div class="software-progress-bar"></div>
+						                </div>
+						
+						            </div>
+						
+						            <div class="software-tool-result"></div>
+						
+						        </div>
+						
+						    </div>
+						    
+						     <div class="software-tool-row">
+
+								    <div class="software-tool-information">
+								
+								        <strong>
+								            Open Installed Apps
+								        </strong>
+								
+								        <span>
+								            Open the Windows Installed Apps settings page
+								            to manage applications directly through Windows.
+								        </span>
+								
+								    </div>
+								
+								    <div class="software-tool-action">
+								
+								        <button type="button"
+								                class="button-primary software-tool-button"
+								                onclick="openInstalledApps(this)">
+								            Open
+								        </button>
+								
+								        <div class="software-tool-result"></div>
+								
+								    </div>
+								
+								</div>
+								
+								<div class="software-tool-row">
+
+							    <div class="software-tool-information">
+							
+							        <strong>
+							            WinGet Diagnostics
+							        </strong>
+							
+							        <span>
+							            Check Windows Package Manager availability,
+							            version and configured package sources.
+							        </span>
+							
+							    </div>
+							
+							    <div class="software-tool-action">
+							
+							        <button type="button"
+							                class="button-primary software-tool-button"
+							                onclick="runWingetDiagnostics(this)">
+							            Run
+							        </button>
+							
+							        <div class="software-tool-progress">
+							
+							            <div class="software-tool-progress-header">
+							
+							                <span class="software-tool-message">
+							                    Running diagnostics...
+							                </span>
+							
+							                <span class="software-progress-spinner"></span>
+							
+							            </div>
+							
+							            <div class="software-progress-track">
+							                <div class="software-progress-bar"></div>
+							            </div>
+							
+							        </div>
+							
+							        <div class="software-tool-result"></div>
+							
+							    </div>
+							
+							</div>
+						
+						</div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+</div>
+</body>
+</html>

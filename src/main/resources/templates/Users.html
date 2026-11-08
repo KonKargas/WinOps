@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Users | WinOps Manager</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+
+    <!-- GLOBAL STYLE -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+
+    <!-- USERS STYLE -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/UsersStyle.css}">
+    <script defer th:src="@{/js/users-progressive.js}"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR                                               -->
+    <!-- ===================================================== -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- APPLICATION CONTENT                                   -->
+    <!-- ===================================================== -->
+
+    <div class="app-content">
+
+
+        <!-- ================================================= -->
+        <!-- TOP BAR                                           -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- MAIN CONTENT                                      -->
+        <!-- ================================================= -->
+
+        <main class="page-content">
+            <p th:if="${deleteSuccess}" class="delete-user-success"
+               th:text="${deleteSuccess}"></p>
+
+
+            <!-- ============================================= -->
+            <!-- PAGE HEADER                                   -->
+            <!-- ============================================= -->
+
+            <section class="page-heading">
+
+
+                <div>
+
+                    <span class="page-label">
+                        USERS
+                    </span>
+
+
+                    <h1>
+                        Local User Management
+                    </h1>
+
+
+                    <p>
+                        View and manage local Windows accounts,
+                        administrator privileges and account security
+                        for this computer.
+                    </p>
+
+                </div>
+
+
+                <!--
+                    This button will become functional
+                    when Create User is implemented.
+                -->
+
+                <a th:href="@{/users/create}"
+				   class="button-primary">
+				
+				    + Create User
+				
+				</a>
+
+
+            </section>
+
+
+
+            <!-- ============================================= -->
+            <!-- USER OVERVIEW                                 -->
+            <!-- ============================================= -->
+
+            <div id="users-dynamic" aria-live="polite" aria-busy="true">
+                <section class="users-panel">
+                    <div class="users-panel-header">
+                        <div><span class="section-label">WINDOWS ACCOUNTS</span>
+                        <h2>Local Accounts</h2>
+                        <p>Loading Windows accounts…</p></div>
+                    </div>
+                    <div class="users-loading" role="status">
+                        <span class="users-loading-spinner" aria-hidden="true"></span>
+                        Retrieving local users and administrator privileges…
+                    </div>
+                </section>
+            </div>
+
+
+
+        </main>
+
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER                                            -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

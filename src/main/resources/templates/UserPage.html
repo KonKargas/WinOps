@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${user.username + ' | WinOps Manager'}">
+        User | WinOps Manager
+    </title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+    <!-- GLOBAL STYLE -->
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+    <!-- USER PAGE STYLE -->
+    <link rel="stylesheet"
+          th:href="@{/css/UserPageStyle.css}">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR                                               -->
+    <!-- ===================================================== -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- APPLICATION CONTENT                                   -->
+    <!-- ===================================================== -->
+
+    <div class="app-content">
+
+        <!-- ================================================= -->
+        <!-- TOP BAR                                           -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- MAIN CONTENT                                      -->
+        <!-- ================================================= -->
+
+        <main class="page-content">
+
+
+            <!-- ============================================= -->
+            <!-- BACK LINK                                     -->
+            <!-- ============================================= -->
+
+            <div class="back-navigation">
+
+                <a th:href="@{/users}">
+                    ← Back to Local Users
+                </a>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- USER HEADER                                   -->
+            <!-- ============================================= -->
+
+            <section class="user-page-header">
+
+                <div class="user-header-left">
+
+                    <div class="large-user-avatar"
+                         th:text="${#strings.substring(user.username, 0, 1).toUpperCase()}">
+                        U
+                    </div>
+
+
+                    <div class="user-header-information">
+
+                        <span class="page-label">
+                            LOCAL USER
+                        </span>
+
+                        <h1 th:text="${user.username}">
+                            Username
+                        </h1>
+
+
+                        <div class="user-header-badges">
+
+                            <!-- ENABLED / DISABLED -->
+
+                            <span class="status-badge"
+                                  th:classappend="${user.enabled}
+                                  ? ' enabled'
+                                  : ' disabled'">
+
+                                <span class="status-dot-small">
+                                </span>
+
+                                <span th:text="${user.enabled}
+                                      ? 'Enabled'
+                                      : 'Disabled'">
+                                    Enabled
+                                </span>
+
+                            </span>
+
+
+                            <!-- ADMINISTRATOR / STANDARD -->
+
+                            <span class="role-badge"
+                                  th:classappend="${user.administrator}
+                                  ? ' administrator'
+                                  : ' standard'"
+                                  th:text="${user.administrator}
+                                  ? 'Administrator'
+                                  : 'Standard User'">
+
+                                Standard User
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ============================================= -->
+            <!-- PAGE GRID                                     -->
+            <!-- ============================================= -->
+
+            <div class="user-page-grid">
+
+
+                <!-- ========================================= -->
+                <!-- LEFT COLUMN                              -->
+                <!-- ========================================= -->
+
+                <div class="user-main-column">
+
+
+                    <!-- ===================================== -->
+                    <!-- ACCOUNT INFORMATION                   -->
+                    <!-- ===================================== -->
+
+                    <section class="settings-card">
+
+                        <div class="settings-card-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    ACCOUNT
+                                </span>
+
+                                <h2>
+                                    Account Information
+                                </h2>
+
+                                <p>
+                                    Edit the basic information associated
+                                    with this local Windows account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card-content">
+
+                            <form th:action="@{/users/{username}/update(username=${user.username})}"
+                                  method="post">
+
+
+                                <div class="form-grid">
+
+
+                                    <!-- USERNAME -->
+
+                                    <div class="form-group">
+
+                                        <label for="username">
+                                            Username
+                                        </label>
+
+                                        <input id="username"
+                                               type="text"
+                                               th:value="${user.username}"
+                                               readonly>
+
+                                        <small>
+                                            The Windows account name cannot
+                                            currently be changed from WinOps.
+                                        </small>
+
+                                    </div>
+
+
+                                    <!-- FULL NAME -->
+
+                                    <div class="form-group">
+
+                                        <label for="fullName">
+                                            Full Name
+                                        </label>
+
+                                        <input id="fullName"
+                                               name="fullName"
+                                               type="text"
+                                               th:value="${user.fullName}"
+                                               placeholder="Enter full name">
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <div class="form-group">
+
+                                    <label for="description">
+                                        Description
+                                    </label>
+
+                                    <textarea id="description"
+                                              name="description"
+                                              rows="3"
+                                              th:text="${user.description}"
+                                              placeholder="Enter account description"></textarea>
+
+                                </div>
+
+
+                                <div class="card-actions">
+
+                                    <button type="submit"
+                                            class="button-primary">
+
+                                        Save Changes
+
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ===================================== -->
+                    <!-- ACCOUNT SETTINGS                      -->
+                    <!-- ===================================== -->
+
+                    <section class="settings-card">
+
+                        <div class="settings-card-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    PERMISSIONS
+                                </span>
+
+                                <h2>
+                                    Account Settings
+                                </h2>
+
+                                <p>
+                                    Review account availability
+                                    and local privileges.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card-content">
+
+						    <form th:action="@{/users/{username}/settings(username=${user.username})}"
+						          method="post">
+						
+						
+						        <!-- ENABLE ACCOUNT -->
+						
+						        <div class="setting-row">
+						
+						            <div class="setting-information">
+						
+						                <strong>
+						                    Account Enabled
+						                </strong>
+						
+						                <span>
+						                    Allow this account to sign in
+						                    and be used on this computer.
+						                </span>
+						
+						            </div>
+						
+						
+						            <label class="settings-switch">
+						
+						                <input type="checkbox"
+						                       name="enabled"
+						                       value="true"
+						                       th:checked="${user.enabled}">
+						
+						                <span class="settings-slider">
+						                </span>
+						
+						            </label>
+						
+						        </div>
+						
+						
+						        <!-- ADMINISTRATOR -->
+						
+						        <div class="setting-row">
+						
+						            <div class="setting-information">
+						
+						                <strong>
+						                    Administrator
+						                </strong>
+						
+						                <span>
+						                    Give this account local
+						                    administrator privileges.
+						                </span>
+						
+						            </div>
+						
+						
+						            <label class="settings-switch">
+						
+						                <input type="checkbox"
+						                       name="administrator"
+						                       value="true"
+						                       th:checked="${user.administrator}">
+						
+						                <span class="settings-slider">
+						                </span>
+						
+						            </label>
+						
+						        </div>
+						
+						
+						        <!-- USER MAY CHANGE PASSWORD -->
+						
+						        <div class="setting-row">
+						
+						            <div class="setting-information">
+						
+						                <strong>
+						                    User May Change Password
+						                </strong>
+						
+						                <span>
+						                    Allow the user to change
+						                    their own Windows password.
+						                </span>
+						
+						            </div>
+						
+						
+						            <label class="settings-switch">
+						
+						                <input type="checkbox"
+						                       name="userMayChangePassword"
+						                       value="true"
+						                       th:checked="${user.userMayChangePassword}">
+						
+						                <span class="settings-slider">
+						                </span>
+						
+						            </label>
+						
+						        </div>
+						
+						
+						        <!-- PASSWORD REQUIRED -->
+						
+						        <div class="setting-row">
+						
+						            <div class="setting-information">
+						
+						                <strong>
+						                    Password Required
+						                </strong>
+						
+						                <span>
+						                    Require this account
+						                    to use a Windows password.
+						                </span>
+						
+						            </div>
+						
+						
+						            <label class="settings-switch">
+						
+						                <input type="checkbox"
+						                       name="passwordRequired"
+						                       value="true"
+						                       th:checked="${user.passwordRequired}">
+						
+						                <span class="settings-slider">
+						                </span>
+						
+						            </label>
+						
+						        </div>
+						
+						
+						        <!-- SAVE SETTINGS -->
+						
+						        <div class="card-actions">
+						
+						            <button type="submit"
+						                    class="button-primary">
+						
+						                Save Settings
+						
+						            </button>
+						
+						        </div>
+						
+						
+						    </form>
+						
+						</div>
+
+                    </section>
+
+
+                    <!-- ===================================== -->
+                    <!-- PASSWORD                              -->
+                    <!-- ===================================== -->
+
+                    <section class="settings-card">
+
+                        <div class="settings-card-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    SECURITY
+                                </span>
+
+                                <h2>
+                                    Password
+                                </h2>
+
+                                <p>
+                                    Set a new password for this
+                                    local Windows account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card-content">
+
+                            <div class="password-status">
+
+                                <div>
+
+                                    <span class="password-status-label">
+                                        Password Required
+                                    </span>
+
+                                    <strong th:text="${user.passwordRequired}
+                                                   ? 'Yes'
+                                                   : 'No'">
+                                        No
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span class="password-status-label">
+                                        Password Expires
+                                    </span>
+
+                                    <strong th:text="${user.passwordExpires}
+                                                   ? 'Yes'
+                                                   : 'No'">
+                                        No
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!--
+                                Password editing will be enabled
+                                in the next implementation step.
+                            -->
+
+                            <form th:action="@{/users/{username}/password(username=${user.username})}"
+							      method="post">
+							
+							    <div class="form-grid password-form">
+							
+							        <div class="form-group">
+							
+							            <label for="newPassword">
+							                New Password
+							            </label>
+							
+							            <input id="newPassword"
+							                   name="newPassword"
+							                   type="password"
+							                   placeholder="Enter new password"
+							                   autocomplete="new-password"
+							                   required>
+							
+							        </div>
+							
+							
+							        <div class="form-group">
+							
+							            <label for="confirmPassword">
+							                Confirm Password
+							            </label>
+							
+							            <input id="confirmPassword"
+							                   name="confirmPassword"
+							                   type="password"
+							                   placeholder="Confirm new password"
+							                   autocomplete="new-password"
+							                   required>
+							
+							        </div>
+							
+							    </div>
+							
+							
+							    <div class="card-actions">
+							
+							        <button type="submit"
+							                class="button-secondary">
+							
+							            Change Password
+							
+							        </button>
+							
+							    </div>
+							
+							</form>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- ========================================= -->
+                <!-- RIGHT COLUMN                             -->
+                <!-- ========================================= -->
+
+                <aside class="user-side-column">
+
+
+                    <!-- ===================================== -->
+                    <!-- ACCOUNT SUMMARY                       -->
+                    <!-- ===================================== -->
+
+                    <section class="side-card">
+
+                        <div class="side-card-header">
+
+                            <h2>
+                                Account Summary
+                            </h2>
+
+                        </div>
+
+
+                        <div class="summary-list">
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Username
+                                </span>
+
+                                <strong th:text="${user.username}">
+                                    User
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Status
+                                </span>
+
+                                <strong th:text="${user.enabled}
+                                               ? 'Enabled'
+                                               : 'Disabled'">
+                                    Enabled
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Account Type
+                                </span>
+
+                                <strong th:text="${user.administrator}
+                                               ? 'Administrator'
+                                               : 'Standard User'">
+                                    Standard User
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Password Required
+                                </span>
+
+                                <strong th:text="${user.passwordRequired}
+                                               ? 'Yes'
+                                               : 'No'">
+                                    No
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Password Expires
+                                </span>
+
+                                <strong th:text="${user.passwordExpires}
+                                               ? 'Yes'
+                                               : 'No'">
+                                    No
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ===================================== -->
+                    <!-- DANGER ZONE                           -->
+                    <!-- ===================================== -->
+
+                    <section class="side-card danger-card">
+
+                        <div class="side-card-header">
+
+                            <span class="danger-label">
+                                DANGER ZONE
+                            </span>
+
+                            <h2>
+                                Account Actions
+                            </h2>
+
+                        </div>
+
+
+                        <div class="danger-action">
+
+                            <div>
+
+                                <strong>
+                                    Delete Account
+                                </strong>
+
+                                <p>
+                                    Permanently remove this local
+                                    Windows account from the computer.
+                                </p>
+
+                            </div>
+
+
+                            <button type="button"
+                                    class="button-danger"
+                                    onclick="document.getElementById('delete-user-dialog').showModal()">
+                                Delete User
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+
+            <!-- DELETE ACCOUNT CONFIRMATION -->
+            <dialog id="delete-user-dialog" class="delete-user-dialog">
+                <form method="post"
+                      th:action="@{/users/{username}/delete(username=${user.username})}">
+                    <h2>Delete local account?</h2>
+                    <p>
+                        This permanently removes the Windows account
+                        <strong th:text="${user.username}">username</strong>.
+                        The user's profile files will not be deleted automatically.
+                    </p>
+                    <label for="delete-confirmation">
+                        Type the exact username to confirm:
+                    </label>
+                    <input id="delete-confirmation"
+                           name="confirmation"
+                           type="text"
+                           autocomplete="off"
+                           required
+                           th:attr="data-expected=${user.username}">
+                    <div class="delete-dialog-actions">
+                        <button type="button"
+                                onclick="document.getElementById('delete-user-dialog').close()">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                                class="button-danger"
+                                id="confirm-delete-user"
+                                disabled>
+                            Permanently Delete
+                        </button>
+                    </div>
+                </form>
+            </dialog>
+
+            <p th:if="${deleteError}" class="delete-user-error"
+               th:text="${deleteError}"></p>
+
+        </main>
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER                                            -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const field = document.getElementById("delete-confirmation");
+        const submit = document.getElementById("confirm-delete-user");
+        if (field && submit) {
+            field.addEventListener("input", () => {
+                submit.disabled = field.value !== field.dataset.expected;
+            });
+        }
+    });
+</script>
+</body>
+
+</html>

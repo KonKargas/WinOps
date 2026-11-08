@@ -1,0 +1,35 @@
+# Maven / build outputs
+/target/
+**/target/
+/build/
+/dist/
+/installer/
+*.jar
+*.war
+*.exe
+!src/main/resources/tools/LGPO.exe
+
+# IDE files
+.classpath
+.project
+.settings/
+.idea/
+.vscode/
+*.iml
+.sts4-cache/
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+
+# Local runtime data / secrets
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+application-local.properties

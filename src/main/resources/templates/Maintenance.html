@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script>
+        try {
+            if (localStorage.getItem("winops.sidebar.collapsed") === "true") {
+                document.documentElement.classList.add("winops-sidebar-collapsed");
+            }
+        } catch (error) { /* Use default sidebar state. */ }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance | WinOps Manager</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/GlobalStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/MaintenanceStyle.css}">
+    <script th:src="@{/js/maintenance.js}" defer></script>
+</head>
+<body>
+<div class="app-layout">
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <div class="app-content">
+        <div th:replace="~{fragments/topbar :: topbar}"></div>
+        <main class="page-content">
+            <section class="page-heading">
+                <div>
+                    <span class="page-label">MAINTENANCE</span>
+                    <h1>Windows Maintenance</h1>
+                    <p>Storage overview, health checks and quick access to Windows administration utilities.</p>
+                </div>
+                <button type="button" class="refresh-button" onclick="window.location.reload()">Refresh</button>
+            </section>
+
+            <div class="maintenance-grid">
+                <section class="maintenance-card">
+                    <div class="maintenance-card-header">
+                        <span class="page-label">STORAGE</span>
+                        <h2>Storage &amp; Cleanup</h2>
+                        <p>Review disk usage and open built-in cleanup tools.</p>
+                    </div>
+                    <div class="maintenance-card-body">
+                        <div class="maintenance-drive">
+                            <div class="maintenance-drive-heading">
+                                <strong th:text="${systemDrive.name} + ' — System Drive'">C: — System Drive</strong>
+                                <span th:text="${systemDrive.usedPercent} + '% used'">0% used</span>
+                            </div>
+                            <div class="maintenance-meter" role="progressbar" aria-label="System drive used space"
+                                 th:attr="aria-valuenow=${systemDrive.usedPercent}" aria-valuemin="0" aria-valuemax="100">
+                                <div th:style="'width:' + ${systemDrive.usedPercent} + '%'" class="maintenance-meter-fill"></div>
+                            </div>
+                            <div class="maintenance-drive-stats" th:if="${systemDrive.totalBytes > 0}">
+                                <span><strong th:text="${#numbers.formatDecimal(systemDrive.freeBytes / 1073741824.0, 1, 1)} + ' GB'">0 GB</strong> free</span>
+                                <span th:text="${#numbers.formatDecimal(systemDrive.totalBytes / 1073741824.0, 1, 1)} + ' GB total'">0 GB total</span>
+                            </div>
+                            <p class="maintenance-note" th:if="${systemDrive.totalBytes == 0}">Disk information is currently unavailable.</p>
+                        </div>
+                        <div class="maintenance-tool" data-tool="storage"><div><strong>Storage Settings</strong><p>Manage Windows storage and temporary files.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="cleanup"><div><strong>Disk Cleanup</strong><p>Open the built-in Windows Disk Cleanup utility.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="temp"><div><strong>Temporary Files Folder</strong><p>Inspect the current account's temporary files.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                    </div>
+                </section>
+
+                <section class="maintenance-card">
+                    <div class="maintenance-card-header">
+                        <span class="page-label">HEALTH</span>
+                        <h2>System Health</h2>
+                        <p>Check Windows health and review reliability information.</p>
+                    </div>
+                    <div class="maintenance-card-body">
+                        <div class="maintenance-tool maintenance-health-tool">
+                            <div><strong>DISM CheckHealth</strong><p>Read-only check of the Windows component store. Does not repair or modify files.</p></div>
+                            <button type="button" id="maintenanceHealthButton" class="maintenance-action">Run</button>
+                        </div>
+                        <div id="maintenanceHealthStatus" class="maintenance-health-status" role="status" aria-live="polite" hidden></div>
+                        <div class="maintenance-tool" data-tool="events"><div><strong>Event Viewer</strong><p>Inspect Windows system and application events.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="reliability"><div><strong>Reliability Monitor</strong><p>Review stability history and recent failures.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="updates"><div><strong>Windows Update</strong><p>Open Windows Update settings.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                    </div>
+                </section>
+
+                <section class="maintenance-card maintenance-card-wide">
+                    <div class="maintenance-card-header">
+                        <span class="page-label">UTILITIES</span>
+                        <h2>Maintenance Utilities</h2>
+                        <p>Quick access to frequently used Windows administration tools.</p>
+                    </div>
+                    <div class="maintenance-utility-grid">
+                        <div class="maintenance-tool" data-tool="taskmanager"><div><strong>Task Manager</strong><p>Processes, performance and resource usage.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="services"><div><strong>Services</strong><p>View and manage Windows services.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="scheduler"><div><strong>Task Scheduler</strong><p>Inspect scheduled Windows tasks.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                        <div class="maintenance-tool" data-tool="startup"><div><strong>Startup Apps</strong><p>Manage applications launched at sign-in.</p></div><button type="button" class="maintenance-action">Open</button></div>
+                    </div>
+                </section>
+            </div>
+            <div id="maintenanceToast" class="maintenance-toast" role="status" aria-live="polite" hidden></div>
+        </main>
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Restore sidebar state before the page is painted. -->
+    <script>
+        try {
+            if (localStorage.getItem("winops.sidebar.collapsed") === "true") {
+                document.documentElement.classList.add("winops-sidebar-collapsed");
+            }
+        } catch (error) {
+            // Continue with the default expanded layout.
+        }
+    </script>
+
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create User | WinOps Manager</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+
+    <!-- GLOBAL STYLE -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+
+    <!-- USER PAGE STYLE -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/UserPageStyle.css}">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR                                               -->
+    <!-- ===================================================== -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- APPLICATION CONTENT                                   -->
+    <!-- ===================================================== -->
+
+    <div class="app-content">
+
+
+        <!-- ================================================= -->
+        <!-- TOP BAR                                           -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- MAIN CONTENT                                      -->
+        <!-- ================================================= -->
+
+        <main class="page-content">
+
+
+            <!-- ============================================= -->
+            <!-- BACK LINK                                     -->
+            <!-- ============================================= -->
+
+            <div class="back-navigation">
+
+                <a th:href="@{/users}">
+                    ← Back to Local Users
+                </a>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- PAGE HEADER                                   -->
+            <!-- ============================================= -->
+
+            <section class="user-page-header">
+
+                <div class="user-header-left">
+
+                    <div class="large-user-avatar">
+                        +
+                    </div>
+
+
+                    <div class="user-header-information">
+
+                        <span class="page-label">
+                            LOCAL USER
+                        </span>
+
+                        <h1>
+                            Create User
+                        </h1>
+
+                        <p>
+                            Create a new local Windows account
+                            on this computer.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ============================================= -->
+            <!-- CREATE USER FORM                              -->
+            <!-- ============================================= -->
+
+            <div class="user-page-grid">
+
+
+                <!-- LEFT COLUMN -->
+
+                <div class="user-main-column">
+
+
+                    <!-- ===================================== -->
+                    <!-- ACCOUNT INFORMATION                   -->
+                    <!-- ===================================== -->
+
+                    <section class="settings-card">
+
+                        <div class="settings-card-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    ACCOUNT
+                                </span>
+
+                                <h2>
+                                    Account Information
+                                </h2>
+
+                                <p>
+                                    Enter the basic information for
+                                    the new Windows account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card-content">
+
+                            <form th:action="@{/users/create}"
+                                  method="post"
+                                  id="createUserForm">
+
+
+                                <div class="form-grid">
+
+
+                                    <!-- USERNAME -->
+
+                                    <div class="form-group">
+
+                                        <label for="username">
+                                            Username
+                                        </label>
+
+                                        <input id="username"
+                                               name="username"
+                                               type="text"
+                                               placeholder="Enter username"
+                                               autocomplete="off"
+                                               required>
+
+                                        <small>
+                                            The local Windows account name.
+                                        </small>
+
+                                    </div>
+
+
+                                    <!-- FULL NAME -->
+
+                                    <div class="form-group">
+
+                                        <label for="fullName">
+                                            Full Name
+                                        </label>
+
+                                        <input id="fullName"
+                                               name="fullName"
+                                               type="text"
+                                               placeholder="Enter full name">
+
+                                        <small>
+                                            Optional display name for
+                                            the account.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <div class="form-group">
+
+                                    <label for="description">
+                                        Description
+                                    </label>
+
+                                    <textarea id="description"
+                                              name="description"
+                                              rows="3"
+                                              placeholder="Enter account description"></textarea>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- PASSWORD                          -->
+                                <!-- ================================= -->
+
+                                <div class="form-grid password-form">
+
+                                    <div class="form-group">
+
+                                        <label for="password">
+                                            Password
+                                        </label>
+
+                                        <input id="password"
+                                               name="password"
+                                               type="password"
+                                               placeholder="Enter password"
+                                               autocomplete="new-password"
+                                               required>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="confirmPassword">
+                                            Confirm Password
+                                        </label>
+
+                                        <input id="confirmPassword"
+                                               name="confirmPassword"
+                                               type="password"
+                                               placeholder="Confirm password"
+                                               autocomplete="new-password"
+                                               required>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- ACCOUNT SETTINGS                  -->
+                                <!-- ================================= -->
+
+                                <div class="setting-row">
+
+                                    <div class="setting-information">
+
+                                        <strong>
+                                            Administrator
+                                        </strong>
+
+                                        <span>
+                                            Add this account to the local
+                                            Administrators group.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="settings-switch">
+
+                                        <input type="checkbox"
+                                               name="administrator"
+                                               value="true">
+
+                                        <span class="settings-slider">
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-information">
+
+                                        <strong>
+                                            User May Change Password
+                                        </strong>
+
+                                        <span>
+                                            Allow this user to change
+                                            their own Windows password.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="settings-switch">
+
+                                        <input type="checkbox"
+                                               name="userMayChangePassword"
+                                               value="true"
+                                               checked>
+
+                                        <span class="settings-slider">
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-information">
+
+                                        <strong>
+                                            Password Required
+                                        </strong>
+
+                                        <span>
+                                            Require this account to use
+                                            a Windows password.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="settings-switch">
+
+                                        <input type="checkbox"
+                                               name="passwordRequired"
+                                               value="true"
+                                               checked>
+
+                                        <span class="settings-slider">
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- ACTIONS                           -->
+                                <!-- ================================= -->
+
+                                <div class="card-actions">
+
+                                    <a th:href="@{/users}"
+                                       class="button-secondary">
+
+                                        Cancel
+
+                                    </a>
+
+
+                                    <button type="submit"
+                                            class="button-primary">
+
+                                        Create User
+
+                                    </button>
+
+                                </div>
+
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- ========================================= -->
+                <!-- RIGHT COLUMN                              -->
+                <!-- ========================================= -->
+
+                <aside class="user-side-column">
+
+
+                    <section class="side-card">
+
+                        <div class="side-card-header">
+
+                            <h2>
+                                New Account
+                            </h2>
+
+                        </div>
+
+
+                        <div class="summary-list">
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Account Type
+                                </span>
+
+                                <strong>
+                                    Local User
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Status
+                                </span>
+
+                                <strong>
+                                    Enabled
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-item">
+
+                                <span>
+                                    Created On
+                                </span>
+
+                                <strong>
+                                    This Computer
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <section class="side-card">
+
+                        <div class="side-card-header">
+
+                            <h2>
+                                Information
+                            </h2>
+
+                        </div>
+
+
+                        <div class="danger-action">
+
+                            <div>
+
+                                <strong>
+                                    Local Account
+                                </strong>
+
+                                <p>
+                                    This creates a local Windows
+                                    account only. It is not connected
+                                    to a Microsoft account or domain.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </aside>
+
+            </div>
+
+        </main>
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER                                            -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

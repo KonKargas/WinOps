@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<aside th:fragment="sidebar" class="sidebar" id="winopsSidebar">
+
+    <div class="sidebar-brand">
+        <div class="brand-icon">W</div>
+        <div class="sidebar-brand-text">
+            <h1>WinOps</h1>
+            <span>Manager</span>
+        </div>
+        <button type="button" class="sidebar-collapse-button"
+                id="sidebarCollapseButton"
+                aria-label="Collapse sidebar"
+                aria-expanded="true"
+                title="Collapse / Expand sidebar">☰</button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+        <a th:href="@{/policies}" data-page="policies" title="Policies">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/policies.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">Policies</span>
+        </a>
+        <a th:href="@{/users}" data-page="users" title="Users">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/users.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">Users</span>
+        </a>
+        <a th:href="@{/system}" data-page="system" title="System">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/system.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">System</span>
+        </a>
+        <a th:href="@{/network}" data-page="network" title="Network">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/network.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">Network</span>
+        </a>
+        <a th:href="@{/software}" data-page="software" title="Software">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/software.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">Software</span>
+        </a>
+        <a th:href="@{/maintenance}" data-page="maintenance" title="Maintenance">
+            <img class="sidebar-link-icon" th:src="@{/images/icons/maintenance.png}" alt="" aria-hidden="true">
+            <span class="sidebar-link-text">Maintenance</span>
+        </a>
+    </nav>
+
+    <script th:src="@{/js/sidebar.js}" defer></script>
+</aside>
+
+</body>
+</html>

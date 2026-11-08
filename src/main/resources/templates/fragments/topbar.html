@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<header th:fragment="topbar"
+        class="topbar">
+
+    <div class="topbar-machine">
+
+        <div class="machine-item">
+            <span>Computer</span>
+            <strong th:text="${computerName}">
+                DESKTOP-PC
+            </strong>
+        </div>
+
+
+        <div class="machine-item">
+            <span>Operating System</span>
+            <strong th:text="${operatingSystem}">
+                Windows 11
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="admin-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+            <span>Running as</span>
+            <strong>Administrator</strong>
+        </div>
+
+    </div>
+
+</header>
+</body>
+</html>

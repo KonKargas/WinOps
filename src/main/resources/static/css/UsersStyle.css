@@ -1,0 +1,511 @@
+/* =========================================================
+   USER PAGE
+   WinOps Manager
+   ========================================================= */
+
+/* =========================================================
+   USER OVERVIEW
+   ========================================================= */
+
+.user-overview {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.user-stat-card {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 19px 21px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.stat-label {
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.user-stat-card strong {
+    margin-top: 2px;
+
+    color: #111827;
+
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.stat-description {
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   USERS PANEL
+   ========================================================= */
+
+.users-panel {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+.users-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 20px 22px;
+
+    background: #fafbfc;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.section-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #2563eb;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+}
+
+.users-panel-header h2 {
+    color: #111827;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.users-panel-header p {
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.users-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+.users-table th {
+    padding: 12px 18px;
+
+    background: #f8fafc;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    text-align: left;
+}
+
+.users-table td {
+    padding: 15px 18px;
+
+    border-bottom: 1px solid #eef2f7;
+
+    color: #374151;
+
+    font-size: 12px;
+
+    vertical-align: middle;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.users-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.users-table tbody tr:hover {
+    background: #fafcff;
+}
+
+
+/* =========================================================
+   USER IDENTITY
+   ========================================================= */
+
+.user-identity {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 190px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.user-details {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.user-details strong {
+    color: #111827;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.user-details span {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+.user-details .muted {
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   ACCOUNT TYPE
+   ========================================================= */
+
+.account-type {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.account-type.administrator {
+    background: #eff6ff;
+
+    color: #2563eb;
+}
+
+.account-type.standard {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   USER STATUS
+   ========================================================= */
+
+.user-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.user-status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+.user-status.enabled {
+    color: #15803d;
+}
+
+.user-status.enabled .user-status-dot {
+    background: #16a34a;
+}
+
+.user-status.disabled {
+    color: #64748b;
+}
+
+.user-status.disabled .user-status-dot {
+    background: #94a3b8;
+}
+
+
+/* =========================================================
+   PASSWORD
+   ========================================================= */
+
+.password-info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 155px;
+}
+
+.password-info span {
+    color: #374151;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.password-info small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+.password-info .warning-text {
+    color: #b45309;
+}
+
+/* =========================================================
+   PAGE ACTION BUTTONS
+   ========================================================= */
+
+.page-heading .button-primary {
+    min-height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 16px;
+
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
+}
+
+.page-heading .button-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 2px 6px rgba(37, 99, 235, 0.18);
+}
+
+.page-heading .button-primary:active {
+    transform: translateY(1px);
+}
+
+.system-input-unit {
+    flex-shrink: 0;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions-column .button-primary {
+    min-width: 78px;
+    min-height: 32px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 13px;
+
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
+}
+
+.actions-column .button-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 2px 6px rgba(37, 99, 235, 0.18);
+}
+
+.actions-column .button-primary:active {
+    transform: translateY(1px);
+}
+
+/* =========================================================
+   EMPTY TABLE
+   ========================================================= */
+
+.empty-users {
+    padding: 35px !important;
+
+    color: #94a3b8 !important;
+
+    text-align: center;
+
+    font-size: 12px !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .user-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .users-table {
+        min-width: 760px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .users-panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+/* Progressive loading */
+.users-loading, .users-loading-error {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 34px 28px;
+    color: var(--text-secondary, #9aa9bd);
+}
+.users-loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #64748b;
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: users-spin .8s linear infinite;
+}
+@keyframes users-spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Network | WinOps Manager</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/NetworkStyle.css}">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+    <div class="app-content">
+
+
+        <!-- TOP BAR -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+        <main class="page-content">
+
+
+            <!-- PAGE HEADER -->
+
+            <section class="page-heading network-page-heading">
+
+                <div>
+
+                    <span class="page-label">
+                        NETWORK
+                    </span>
+
+                    <h1>
+                        Network Management
+                    </h1>
+
+                    <p>
+                        View network adapter information,
+                        configure network settings and access
+                        Windows networking tools.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <div id="network-loading-notice"
+                 th:if="${adapterDetailsLoading or !adapterDetailsReady}"
+                 class="network-loading-notice">
+                Loading detailed adapter information in the background…
+                <span>IP gateway, DNS and DHCP settings will appear shortly.</span>
+            </div>
+
+            <!-- NO NETWORK ADAPTERS -->
+
+            <div class="network-empty-state"
+                 th:if="${#lists.isEmpty(adapters)}">
+
+                <strong>
+                    No network adapters found
+                </strong>
+
+                <span>
+                    WinOps Manager could not find any
+                    physical network adapters on this computer.
+                </span>
+
+            </div>
+
+
+            <th:block th:if="${!#lists.isEmpty(adapters)}">
+
+
+                <!-- ADAPTER SELECTION -->
+
+                <section class="network-adapter-bar">
+
+                    <div class="network-adapter-heading">
+
+                        <span class="network-adapter-label">
+                            ACTIVE ADAPTER
+                        </span>
+
+                        <strong th:text="${selectedAdapter.name}">
+                            Ethernet
+                        </strong>
+
+                        <span th:text="${selectedAdapter.interfaceDescription}">
+                            Network Adapter
+                        </span>
+
+                    </div>
+
+
+                    <form th:action="@{/network}"
+                          method="get"
+                          class="network-adapter-form">
+
+                        <label for="adapter">
+                            Network Adapter
+                        </label>
+
+                        <select id="adapter"
+                                name="adapter"
+                                class="network-select"
+                                onchange="this.form.submit()">
+
+                            <option th:each="networkAdapter : ${adapters}"
+                                    th:value="${networkAdapter.name}"
+                                    th:text="${networkAdapter.name}"
+                                    th:selected="${networkAdapter.name == selectedAdapter.name}">
+                                Ethernet
+                            </option>
+
+                        </select>
+
+                    </form>
+
+                </section>
+
+
+                <!-- NETWORK OVERVIEW -->
+
+                <section class="network-overview">
+
+
+                    <!-- STATUS -->
+
+                    <div class="network-stat-card">
+
+                        <span class="network-stat-label">
+                            Connection Status
+                        </span>
+
+                        <div class="network-status-value">
+
+                            <span class="network-status-dot"
+                                  th:classappend="${selectedAdapter.status == 'Up'}
+                                      ? ' network-status-online'
+                                      : ' network-status-offline'">
+                            </span>
+
+                            <strong th:text="${selectedAdapter.status}">
+                                Up
+                            </strong>
+
+                        </div>
+
+                        <small>
+                            Adapter state
+                        </small>
+
+                    </div>
+
+
+                    <!-- IPV4 -->
+
+                    <div class="network-stat-card">
+
+                        <span class="network-stat-label">
+                            IPv4 Address
+                        </span>
+
+                        <strong th:text="${selectedAdapter.ipv4Address}">
+                            192.168.1.100
+                        </strong>
+
+                        <small>
+                            Current IPv4 address
+                        </small>
+
+                    </div>
+
+
+                    <!-- GATEWAY -->
+
+                    <div class="network-stat-card">
+
+                        <span class="network-stat-label">
+                            Default Gateway
+                        </span>
+
+                        <strong th:text="${selectedAdapter.defaultGateway}">
+                            192.168.1.1
+                        </strong>
+
+                        <small>
+                            IPv4 gateway
+                        </small>
+
+                    </div>
+
+
+                    <!-- DHCP -->
+
+                    <div class="network-stat-card">
+
+                        <span class="network-stat-label">
+                            DHCP
+                        </span>
+
+                        <strong th:text="${selectedAdapter.dhcpEnabled
+                                ? 'Enabled'
+                                : 'Disabled'}">
+                            Enabled
+                        </strong>
+
+                        <small>
+                            IPv4 configuration
+                        </small>
+
+                    </div>
+
+                </section>
+
+
+                <!-- NETWORK INFORMATION -->
+
+                <div class="network-grid">
+
+
+                    <!-- LEFT COLUMN -->
+
+                    <div class="network-column">
+
+
+                        <section class="network-card">
+
+                            <div class="network-card-header">
+
+                                <span class="page-label">
+                                    OVERVIEW
+                                </span>
+
+                                <h2>
+                                    Network Information
+                                </h2>
+
+                                <p>
+                                    Current configuration of the
+                                    selected network adapter.
+                                </p>
+
+                            </div>
+
+
+                            <div class="network-card-content">
+
+
+                                <!-- ADAPTER -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Adapter
+                                        </strong>
+
+                                        <span>
+                                            Windows interface alias
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.name}">
+                                        Ethernet
+                                    </span>
+
+                                </div>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Description
+                                        </strong>
+
+                                        <span>
+                                            Network interface hardware
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.interfaceDescription}">
+                                        Network Adapter
+                                    </span>
+
+                                </div>
+
+
+                                <!-- STATUS -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Connection Status
+                                        </strong>
+
+                                        <span>
+                                            Current adapter state
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.status}">
+                                        Up
+                                    </span>
+
+                                </div>
+
+
+                                <!-- IPV4 -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            IPv4 Address
+                                        </strong>
+
+                                        <span>
+                                            Current IPv4 address
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.ipv4Address}">
+                                        Not available
+                                    </span>
+
+                                </div>
+
+
+                                <!-- SUBNET MASK -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Subnet Mask
+                                        </strong>
+
+                                        <span>
+                                            IPv4 subnet mask
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.subnetMask}">
+                                        Not available
+                                    </span>
+
+                                </div>
+
+
+                                <!-- GATEWAY -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Default Gateway
+                                        </strong>
+
+                                        <span>
+                                            Default IPv4 route
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.defaultGateway}">
+                                        Not available
+                                    </span>
+
+                                </div>
+
+
+                                <!-- MAC -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            MAC Address
+                                        </strong>
+
+                                        <span>
+                                            Physical hardware address
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value network-monospace"
+                                          th:text="${selectedAdapter.macAddress}">
+                                        00-00-00-00-00-00
+                                    </span>
+
+                                </div>
+
+
+                                <!-- DHCP -->
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            DHCP
+                                        </strong>
+
+                                        <span>
+                                            Automatic IPv4 configuration
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.dhcpEnabled
+                                                  ? 'Enabled'
+                                                  : 'Disabled'}">
+                                        Enabled
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- NETWORK CONFIGURATION -->
+
+						<section class="network-card">
+						
+						    <div class="network-card-header">
+						
+						        <span class="page-label">
+						            CONFIGURATION
+						        </span>
+						
+						        <h2>
+						            Network Configuration
+						        </h2>
+						
+						        <p>
+						            Configure automatic DHCP or
+						            static IPv4 network settings.
+						        </p>
+						
+						    </div>
+						
+						
+						    <div class="network-card-content">
+						
+						
+						        <!-- CURRENT MODE -->
+						
+						        <div class="network-configuration-status">
+						
+						            <div>
+						
+						                <strong>
+						                    Current IPv4 Mode
+						                </strong>
+						
+						                <span>
+						                    Configuration method used
+						                    by this adapter.
+						                </span>
+						
+						            </div>
+						
+						
+						            <span class="network-mode-badge"
+						                  th:classappend="${selectedAdapter.dhcpEnabled}
+						                      ? ' network-mode-dhcp'
+						                      : ' network-mode-static'"
+						                  th:text="${selectedAdapter.dhcpEnabled}
+						                      ? 'DHCP'
+						                      : 'STATIC'">
+						
+						                DHCP
+						
+						            </span>
+						
+						        </div>
+						
+						
+						        <!-- DHCP -->
+						
+						        <div class="network-setting-block">
+						
+						            <div class="network-setting-heading">
+						
+						                <strong>
+						                    Automatic Configuration (DHCP)
+						                </strong>
+						
+						                <span>
+						                    Obtain the IPv4 address, gateway
+						                    and DNS servers automatically
+						                    from the network.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/dhcp}"
+						                  method="post">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						
+						                <button type="submit"
+						                        class="button-primary"
+						                        th:disabled="${selectedAdapter.dhcpEnabled}"
+						                        onclick="return confirm(
+						                            'Switch this adapter to automatic DHCP configuration?'
+						                        );">
+						
+						                    Enable DHCP
+						
+						                </button>
+						
+						            </form>
+						
+						
+						            <div class="network-success-message"
+						                 th:if="${param.dhcpSuccess != null
+						                         and param.dhcpSuccess[0] == 'true'}">
+						
+						                DHCP configuration applied successfully.
+						
+						            </div>
+						
+						
+						            <div class="network-error-message"
+						                 th:if="${param.dhcpSuccess != null
+						                         and param.dhcpSuccess[0] == 'false'}">
+						
+						                DHCP configuration could not be applied.
+						
+						            </div>
+						
+						        </div>
+						
+						
+						        <!-- STATIC IPV4 -->
+						
+						        <div class="network-setting-block">
+						
+						            <div class="network-setting-heading">
+						
+						                <strong>
+						                    Static IPv4 Configuration
+						                </strong>
+						
+						                <span>
+						                    Assign a fixed IPv4 address,
+						                    subnet mask, gateway and DNS
+						                    servers to this adapter.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/static-ip}"
+						                  method="post"
+						                  class="network-static-form"
+						                  onsubmit="return confirm(
+						                      'Apply this static IPv4 configuration? Incorrect settings may interrupt network connectivity.'
+						                  );">
+						
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						
+						                <!-- IP ADDRESS -->
+						
+						                <div class="network-form-field">
+						
+						                    <label for="ipAddress">
+						                        IPv4 Address
+						                    </label>
+						
+						                    <input id="ipAddress"
+						                           type="text"
+						                           name="ipAddress"
+						                           class="network-input"
+						                           placeholder="192.168.1.100"
+						                           th:value="${!selectedAdapter.dhcpEnabled
+						                               and selectedAdapter.ipv4Address != 'Not available'
+						                               ? selectedAdapter.ipv4Address
+						                               : ''}"
+						                           required>
+						
+						                </div>
+						
+						
+						                <!-- SUBNET MASK -->
+						
+						                <div class="network-form-field">
+						
+						                    <label for="subnetMask">
+						                        Subnet Mask
+						                    </label>
+						
+						                    <input id="subnetMask"
+						                           type="text"
+						                           name="subnetMask"
+						                           class="network-input"
+						                           placeholder="255.255.255.0"
+						                           th:value="${!selectedAdapter.dhcpEnabled
+						                               and selectedAdapter.subnetMask != 'Not available'
+						                               ? selectedAdapter.subnetMask
+						                               : ''}"
+						                           required>
+						
+						                </div>
+						
+						
+						                <!-- GATEWAY -->
+						
+						                <div class="network-form-field">
+						
+						                    <label for="defaultGateway">
+						                        Default Gateway
+						                    </label>
+						
+						                    <input id="defaultGateway"
+						                           type="text"
+						                           name="defaultGateway"
+						                           class="network-input"
+						                           placeholder="192.168.1.1"
+						                           th:value="${!selectedAdapter.dhcpEnabled
+						                               and selectedAdapter.defaultGateway != 'Not available'
+						                               ? selectedAdapter.defaultGateway
+						                               : ''}"
+						                           required>
+						
+						                </div>
+						
+						
+						                <!-- PRIMARY DNS -->
+						
+						                <div class="network-form-field">
+						
+						                    <label for="primaryDns">
+						                        Primary DNS
+						                    </label>
+						
+						                    <input id="primaryDns"
+						                           type="text"
+						                           name="primaryDns"
+						                           class="network-input"
+						                           placeholder="1.1.1.1"
+						                           th:value="${!selectedAdapter.dhcpEnabled
+						                               and selectedAdapter.primaryDns != 'Not available'
+						                               ? selectedAdapter.primaryDns
+						                               : ''}"
+						                           required>
+						
+						                </div>
+						
+						
+						                <!-- SECONDARY DNS -->
+						
+						                <div class="network-form-field">
+						
+						                    <label for="secondaryDns">
+						                        Secondary DNS
+						                    </label>
+						
+						                    <input id="secondaryDns"
+						                           type="text"
+						                           name="secondaryDns"
+						                           class="network-input"
+						                           placeholder="Optional"
+						                           th:value="${!selectedAdapter.dhcpEnabled
+						                               and selectedAdapter.secondaryDns != 'Not available'
+						                               ? selectedAdapter.secondaryDns
+						                               : ''}">
+						
+						                </div>
+						
+						
+						                <div class="network-static-actions">
+						
+						                    <button type="submit"
+						                            class="button-primary">
+						
+						                        Apply Static IP
+						
+						                    </button>
+						
+						                </div>
+						
+						            </form>
+						
+						
+						            <div class="network-success-message"
+						                 th:if="${param.staticSuccess != null
+						                         and param.staticSuccess[0] == 'true'}">
+						
+						                Static IPv4 configuration applied successfully.
+						
+						            </div>
+						
+						
+						            <div class="network-error-message"
+						                 th:if="${param.staticSuccess != null
+						                         and param.staticSuccess[0] == 'false'}">
+						
+						                Static IPv4 configuration could not be applied.
+						                Check the entered addresses and administrator privileges.
+						
+						            </div>
+						
+						        </div>
+						
+						    </div>
+						
+						</section>
+
+                    </div>
+
+
+                    <!-- RIGHT COLUMN -->
+
+                    <div class="network-column">
+
+
+                        <!-- DNS INFORMATION -->
+
+                        <section class="network-card">
+
+                            <div class="network-card-header">
+
+                                <span class="page-label">
+                                    DNS
+                                </span>
+
+                                <h2>
+                                    DNS Configuration
+                                </h2>
+
+                                <p>
+                                    DNS servers currently assigned
+                                    to the selected adapter.
+                                </p>
+
+                            </div>
+
+
+                            <div class="network-card-content">
+
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Primary DNS
+                                        </strong>
+
+                                        <span>
+                                            Preferred DNS server
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.primaryDns}">
+                                        Not available
+                                    </span>
+
+                                </div>
+
+
+                                <div class="network-info-row">
+
+                                    <div class="network-info-description">
+
+                                        <strong>
+                                            Secondary DNS
+                                        </strong>
+
+                                        <span>
+                                            Alternate DNS server
+                                        </span>
+
+                                    </div>
+
+                                    <span class="network-info-value"
+                                          th:text="${selectedAdapter.secondaryDns}">
+                                        Not available
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- NETWORK ACTIONS -->
+
+						<section class="network-card">
+						
+						    <div class="network-card-header">
+						
+						        <span class="page-label">
+						            ACTIONS
+						        </span>
+						
+						        <h2>
+						            Network Actions
+						        </h2>
+						
+						        <p>
+						            Perform common Windows network
+						            administration operations.
+						        </p>
+						
+						    </div>
+						
+						
+						    <div class="network-card-content">
+						
+						
+						        <!-- ADAPTER STATE -->
+						
+						        <div class="network-action-row">
+						
+						            <div class="network-action-information">
+						
+						                <strong>
+						                    Network Adapter
+						                </strong>
+						
+						                <span>
+						                    Enable or disable the selected
+						                    Windows network adapter.
+						                </span>
+						
+						            </div>
+						
+						
+						            <!-- DISABLE -->
+						
+						            <form th:if="${selectedAdapter.status == 'Up'}"
+						                  th:action="@{/network/adapter/disable}"
+						                  method="post"
+						                  onsubmit="return confirm(
+						                      'Disable this network adapter? Network connectivity may be interrupted.'
+						                  );">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="button-secondary">
+						
+						                    Disable
+						
+						                </button>
+						
+						            </form>
+						
+						
+						            <!-- ENABLE -->
+						
+						            <form th:unless="${selectedAdapter.status == 'Up'}"
+						                  th:action="@{/network/adapter/enable}"
+						                  method="post">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="button-primary">
+						
+						                    Enable
+						
+						                </button>
+						
+						            </form>
+						
+						        </div>
+						
+						
+						        <!-- RELEASE DHCP -->
+						
+						        <div class="network-action-row">
+						
+						            <div class="network-action-information">
+						
+						                <strong>
+						                    Release DHCP Lease
+						                </strong>
+						
+						                <span>
+						                    Release the current DHCP-assigned
+						                    IPv4 configuration.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/dhcp/release}"
+						                  method="post">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="button-secondary"
+						                        th:disabled="${!selectedAdapter.dhcpEnabled}"
+						                        onclick="return confirm(
+						                            'Release the current DHCP lease? Network connectivity will be interrupted until the lease is renewed.'
+						                        );">
+						
+						                    Release
+						
+						                </button>
+						
+						            </form>
+						
+						        </div>
+						
+						
+						        <!-- RENEW DHCP -->
+						
+						        <div class="network-action-row">
+						
+						            <div class="network-action-information">
+						
+						                <strong>
+						                    Renew DHCP Lease
+						                </strong>
+						
+						                <span>
+						                    Request a new IPv4 configuration
+						                    from the DHCP server.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/dhcp/renew}"
+						                  method="post">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="button-primary"
+						                        th:disabled="${!selectedAdapter.dhcpEnabled}">
+						
+						                    Renew
+						
+						                </button>
+						
+						            </form>
+						
+						        </div>
+						
+						
+						        <!-- FLUSH DNS -->
+						
+						        <div class="network-action-row">
+						
+						            <div class="network-action-information">
+						
+						                <strong>
+						                    Flush DNS Cache
+						                </strong>
+						
+						                <span>
+						                    Clear the local Windows
+						                    DNS resolver cache.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/dns/flush}"
+						                  method="post">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="button-primary">
+						
+						                    Flush DNS
+						
+						                </button>
+						
+						            </form>
+						
+						        </div>
+						
+						
+						        <!-- RESET NETWORK -->
+						
+						        <div class="network-action-row">
+						
+						            <div class="network-action-information">
+						
+						                <strong>
+						                    Reset Network Stack
+						                </strong>
+						
+						                <span>
+						                    Reset Windows Winsock and
+						                    TCP/IP networking components.
+						                    A restart may be required.
+						                </span>
+						
+						            </div>
+						
+						
+						            <form th:action="@{/network/reset}"
+						                  method="post"
+						                  onsubmit="return confirm(
+						                      'Reset the Windows network stack? A restart may be required afterward.'
+						                  );">
+						
+						                <input type="hidden"
+						                       name="adapter"
+						                       th:value="${selectedAdapter.name}">
+						
+						                <button type="submit"
+						                        class="network-danger-button">
+						
+						                    Reset
+						
+						                </button>
+						
+						            </form>
+						
+						        </div>
+						
+						
+						        <!-- SUCCESS MESSAGES -->
+						
+						        <div class="network-success-message"
+						             th:if="${param.adapterEnabled != null
+						                     and param.adapterEnabled[0] == 'true'}">
+						            Network adapter enabled successfully.
+						        </div>
+						
+						
+						        <div class="network-success-message"
+						             th:if="${param.adapterDisabled != null
+						                     and param.adapterDisabled[0] == 'true'}">
+						            Network adapter disabled successfully.
+						        </div>
+						
+						
+						        <div class="network-success-message"
+						             th:if="${param.dhcpReleased != null
+						                     and param.dhcpReleased[0] == 'true'}">
+						            DHCP lease released successfully.
+						        </div>
+						
+						
+						        <div class="network-success-message"
+						             th:if="${param.dhcpRenewed != null
+						                     and param.dhcpRenewed[0] == 'true'}">
+						            DHCP lease renewed successfully.
+						        </div>
+						
+						
+						        <div class="network-success-message"
+						             th:if="${param.dnsFlushed != null
+						                     and param.dnsFlushed[0] == 'true'}">
+						            DNS resolver cache flushed successfully.
+						        </div>
+						
+						
+						        <div class="network-success-message"
+						             th:if="${param.networkReset != null
+						                     and param.networkReset[0] == 'true'}">
+						
+						            Network stack reset successfully.
+						            Restart Windows to complete the reset.
+						
+						        </div>
+						
+						
+						        <!-- ERROR MESSAGE -->
+						
+						        <div class="network-error-message"
+						             th:if="${param.adapterEnabled != null
+						                        and param.adapterEnabled[0] == 'false'
+						                     or param.adapterDisabled != null
+						                        and param.adapterDisabled[0] == 'false'
+						                     or param.dhcpReleased != null
+						                        and param.dhcpReleased[0] == 'false'
+						                     or param.dhcpRenewed != null
+						                        and param.dhcpRenewed[0] == 'false'
+						                     or param.dnsFlushed != null
+						                        and param.dnsFlushed[0] == 'false'
+						                     or param.networkReset != null
+						                        and param.networkReset[0] == 'false'}">
+						
+						            The requested network operation could not
+						            be completed.
+						
+						        </div>
+						
+						    </div>
+						
+						</section>
+
+
+                        <!-- NETWORK DIAGNOSTIC TOOLS -->
+                        <section class="network-card network-diagnostics">
+                            <div class="network-card-header">
+                                <span class="page-label">TOOLS</span>
+                                <h2>Network Tools</h2>
+                                <p>Run network diagnostics and open Windows networking utilities.</p>
+                            </div>
+                            <div class="network-card-content">
+                                <div class="network-diagnostic-row">
+                                    <div class="network-diagnostic-info">
+                                        <strong>Ping</strong>
+                                        <span>Test connectivity to a hostname or IP address.</span>
+                                    </div>
+                                    <div class="network-diagnostic-controls">
+                                        <input id="network-ping-host" type="text" placeholder="e.g. 1.1.1.1" maxlength="253" aria-label="Ping target">
+                                        <button type="button" onclick="runNetworkDiagnostic('ping', this)">Ping</button>
+                                    </div>
+                                </div>
+                                <div class="network-diagnostic-row">
+                                    <div class="network-diagnostic-info">
+                                        <strong>DNS Lookup</strong>
+                                        <span>Resolve a domain or IP address using the configured DNS resolver.</span>
+                                    </div>
+                                    <div class="network-diagnostic-controls">
+                                        <input id="network-dns-host" type="text" placeholder="e.g. example.com" maxlength="253" aria-label="DNS lookup target">
+                                        <button type="button" onclick="runNetworkDiagnostic('dns', this)">Lookup</button>
+                                    </div>
+                                </div>
+                                <div class="network-diagnostic-row">
+                                    <div class="network-diagnostic-info">
+                                        <strong>IP Configuration</strong>
+                                        <span>Display detailed Windows network adapter configuration.</span>
+                                    </div>
+                                    <div class="network-diagnostic-controls">
+                                        <button type="button" onclick="runNetworkDiagnostic('ipconfig', this)">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="network-diagnostic-row">
+                                    <div class="network-diagnostic-info">
+                                        <strong>Network Connections</strong>
+                                        <span>Open the Windows network adapters control panel.</span>
+                                    </div>
+                                    <div class="network-diagnostic-controls">
+                                        <button type="button" onclick="runNetworkDiagnostic('connections', this)">Open</button>
+                                    </div>
+                                </div>
+                                <div class="network-diagnostic-output" id="network-diagnostic-panel" hidden>
+                                    <div class="network-diagnostic-output-heading">
+                                        <strong id="network-diagnostic-title">Diagnostic Result</strong>
+                                        <button type="button" onclick="document.getElementById('network-diagnostic-panel').hidden = true">Close</button>
+                                    </div>
+                                    <pre id="network-diagnostic-result" aria-live="polite"></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </th:block>
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+async function runNetworkDiagnostic(tool, button) {
+    const panel = document.getElementById('network-diagnostic-panel');
+    const result = document.getElementById('network-diagnostic-result');
+    const title = document.getElementById('network-diagnostic-title');
+    const names = {ping: 'Ping', dns: 'DNS Lookup', ipconfig: 'IP Configuration', connections: 'Network Connections'};
+    const input = tool === 'ping' ? document.getElementById('network-ping-host')
+                : tool === 'dns' ? document.getElementById('network-dns-host') : null;
+    const host = input ? input.value.trim() : '';
+    if (input && !host) {
+        input.focus();
+        return;
+    }
+    panel.hidden = false;
+    title.textContent = names[tool] || 'Diagnostic';
+    result.textContent = 'Running diagnostic...';
+    button.disabled = true;
+    try {
+        const url = tool === 'connections'
+            ? '/network/tools/connections'
+            : '/network/tools/' + tool + (input ? '?host=' + encodeURIComponent(host) : '');
+        const response = await fetch(url, {
+            method: tool === 'connections' ? 'POST' : 'GET',
+            cache: 'no-store'
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        result.textContent = data.output || 'No output.';
+        panel.classList.toggle('diagnostic-error', data.status !== 'ok');
+    } catch (error) {
+        result.textContent = 'Unable to run diagnostic: ' + error.message;
+        panel.classList.add('diagnostic-error');
+    } finally {
+        button.disabled = false;
+    }
+}
+</script>
+<script th:if="${adapterDetailsLoading or !adapterDetailsReady}">
+(() => {
+    let attempts = 0;
+    const poll = async () => {
+        if (++attempts > 25) return;
+        try {
+            const response = await fetch('/network/adapters/status', {cache: 'no-store'});
+            const status = await response.json();
+            if (status.ready && !status.loading) {
+                // Do not discard partially edited network settings.
+                const editing = [...document.querySelectorAll('input, select, textarea')]
+                    .some(el => el === document.activeElement &&
+                        !['hidden', 'submit', 'button'].includes(el.type));
+                if (!editing) {
+                    window.location.reload();
+                    return;
+                }
+            }
+        } catch (e) { /* A transient status failure should not block the page. */ }
+        window.setTimeout(poll, 750);
+    };
+    window.setTimeout(poll, 750);
+})();
+</script>
+</body>
+
+</html>

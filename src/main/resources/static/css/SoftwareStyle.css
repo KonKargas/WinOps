@@ -1,0 +1,1624 @@
+/* =========================================================
+   SOFTWARE PAGE
+   WinOps Manager
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.software-page-heading {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   WARNING
+   ========================================================= */
+
+.software-warning {
+    margin-bottom: 16px;
+
+    padding: 15px 18px;
+
+    background: #fffbeb;
+
+    border: 1px solid #fde68a;
+    border-radius: 9px;
+}
+
+
+.software-warning > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.software-warning strong {
+    color: #92400e;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.software-warning span {
+    color: #a16207;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   OVERVIEW
+   ========================================================= */
+
+.software-overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+
+.software-stat-card {
+    min-height: 118px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 19px 21px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.software-stat-label {
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+
+.software-stat-card > strong,
+.software-status-value strong {
+    color: #111827;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+.software-stat-card small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.software-status-value {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.software-status-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #94a3b8;
+}
+
+
+.software-status-online {
+    background: #22c55e;
+}
+
+
+.software-status-offline {
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+
+.software-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(300px, 0.75fr);
+
+    gap: 16px;
+
+    align-items: start;
+}
+
+
+.software-column {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.software-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.software-card-header {
+    min-height: 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 22px;
+
+    background: #fafbfc;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.software-card-header h2 {
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.software-card-header p {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+.software-card-content {
+    padding: 4px 22px;
+}
+
+
+/* =========================================================
+   APPLICATION COUNT
+   ========================================================= */
+
+.software-application-count {
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 2px;
+}
+
+
+.software-application-count strong {
+    color: #111827;
+
+    font-size: 17px;
+    font-weight: 750;
+}
+
+
+.software-application-count span {
+    color: #94a3b8;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.software-search-bar {
+    padding: 16px 0 13px;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.software-search-input {
+    width: 100%;
+    min-height: 39px;
+
+    padding: 0 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.software-search-input::placeholder {
+    color: #9ca3af;
+}
+
+
+.software-search-input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   APPLICATION TABLE
+   ========================================================= */
+
+.software-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding-bottom: 8px;
+}
+
+
+.software-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+
+.software-table th {
+    padding: 12px 10px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #64748b;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 0.05em;
+
+    text-align: left;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+.software-table th:first-child,
+.software-table td:first-child {
+    padding-left: 0;
+}
+
+
+.software-table th:last-child,
+.software-table td:last-child {
+    padding-right: 0;
+}
+
+
+.software-table td {
+    padding: 13px 10px;
+
+    border-bottom: 1px solid #eef2f7;
+
+    color: #475569;
+
+    font-size: 10px;
+
+    vertical-align: middle;
+}
+
+
+.software-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.software-table tbody tr {
+    transition: background 0.12s ease;
+}
+
+
+.software-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+
+.software-name-cell {
+    min-width: 145px;
+}
+
+
+.software-name-cell strong {
+    color: #1f2937;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-package-id {
+    color: #64748b;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        monospace;
+
+    font-size: 9px;
+}
+
+
+.software-update-version {
+    display: inline-flex;
+
+    padding: 3px 7px;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.software-current-version {
+    color: #cbd5e1;
+}
+
+
+.software-source-badge {
+    display: inline-flex;
+
+    padding: 3px 7px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+
+    background: #f8fafc;
+
+    color: #475569;
+
+    font-size: 9px;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   INFORMATION ROW
+   ========================================================= */
+
+.software-info-row {
+    min-height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.software-info-row:last-child {
+    border-bottom: none;
+}
+
+
+.software-info-row > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.software-info-row strong {
+    color: #1f2937;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-info-row > div span {
+    color: #64748b;
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+.software-info-value {
+    flex-shrink: 0;
+
+    max-width: 45%;
+
+    color: #111827;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   SOURCES
+   ========================================================= */
+
+.software-source-row {
+    min-height: 62px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.software-source-row:last-child {
+    border-bottom: none;
+}
+
+
+.software-source-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dbeafe;
+    border-radius: 7px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+
+.software-source-row > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.software-source-row strong {
+    color: #1f2937;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-source-row span {
+    color: #94a3b8;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PLACEHOLDERS
+   ========================================================= */
+
+.software-coming-soon {
+    min-height: 115px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px 0;
+}
+
+
+.software-coming-soon.compact {
+    min-height: 90px;
+}
+
+
+.software-placeholder-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+.software-coming-soon > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.software-coming-soon strong {
+    color: #374151;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-coming-soon span {
+    max-width: 430px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMPTY STATES
+   ========================================================= */
+
+.software-empty-state {
+    min-height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 5px;
+
+    text-align: center;
+}
+
+
+.software-empty-state strong {
+    color: #374151;
+
+    font-size: 12px;
+}
+
+
+.software-empty-state span {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+.software-empty-small {
+    padding: 20px 0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+.software-search-empty {
+    display: none;
+
+    padding: 25px 0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    text-align: center;
+}
+
+/* =========================================================
+   SOFTWARE CATALOG
+   ========================================================= */
+
+.software-catalog {
+    width: 100%;
+}
+
+
+.software-catalog-row {
+    min-height: 84px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.software-catalog-row:last-child {
+    border-bottom: none;
+}
+
+
+.software-catalog-information {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.software-catalog-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.software-catalog-title strong {
+    color: #1f2937;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-catalog-information > span {
+    color: #64748b;
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+.software-catalog-information small {
+    color: #94a3b8;
+
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        monospace;
+
+    font-size: 8px;
+}
+
+
+.software-category-badge {
+    display: inline-flex;
+
+    padding: 3px 7px;
+
+    border: 1px solid #dbeafe;
+    border-radius: 999px;
+
+    background: #eff6ff;
+
+    color: #2563eb !important;
+
+    font-size: 8px !important;
+    font-weight: 700;
+}
+
+
+.software-catalog-row form {
+    flex-shrink: 0;
+}
+
+
+.software-catalog-row .button-primary {
+    min-width: 86px;
+}
+
+
+/* =========================================================
+   INSTALLED STATE
+   ========================================================= */
+
+.software-installed-state {
+    flex-shrink: 0;
+}
+
+
+.software-installed-state span {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 30px;
+
+    padding: 0 10px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 999px;
+
+    background: #f0fdf4;
+
+    color: #15803d;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ACTION MESSAGES
+   ========================================================= */
+
+.software-success-message,
+.software-error-message {
+    margin: 15px 0 5px;
+
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.software-success-message {
+    border: 1px solid #bbf7d0;
+
+    background: #f0fdf4;
+
+    color: #15803d;
+}
+
+
+.software-error-message {
+    border: 1px solid #fecaca;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .software-grid {
+        grid-template-columns:
+            minmax(0, 1.4fr)
+            minmax(280px, 0.8fr);
+    }
+
+}
+
+
+@media (max-width: 1050px) {
+
+    .software-overview {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .software-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .software-overview {
+        grid-template-columns: 1fr;
+    }
+
+
+    .software-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .software-application-count {
+        align-items: flex-start;
+    }
+
+
+    .software-info-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+
+    .software-info-value {
+        max-width: 100%;
+
+        text-align: left;
+    }
+
+
+    .software-table {
+        min-width: 700px;
+    }
+    
+    .software-catalog-row {
+	    align-items: flex-start;
+	    flex-direction: column;
+	
+	    gap: 12px;
+	}
+	
+	
+	.software-catalog-row form,
+	.software-catalog-row .button-primary {
+	    width: 100%;
+	}
+
+}
+/* =========================================================
+   LIVE SOFTWARE INSTALLATION
+   ========================================================= */
+
+.software-install-action {
+    min-width: 190px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.software-install-progress {
+    width: 190px;
+    display: none;
+}
+
+.software-install-progress.active {
+    display: block;
+}
+
+.software-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.software-progress-message {
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.software-progress-spinner {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    border: 2px solid #dbeafe;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: software-spin 0.75s linear infinite;
+}
+
+.software-progress-track {
+    position: relative;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e5e7eb;
+}
+
+.software-progress-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 42%;
+    border-radius: inherit;
+    background: #2563eb;
+    animation: software-progress 1.15s ease-in-out infinite;
+}
+
+.software-install-progress.installing .software-progress-bar {
+    width: 68%;
+    animation-duration: 0.9s;
+}
+
+.software-install-result {
+    min-height: 16px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.software-install-result.success { color: #15803d; }
+
+.software-install-result.error {
+    max-width: 220px;
+    color: #b91c1c;
+    text-align: right;
+}
+
+@keyframes software-progress {
+    0% { left: -45%; }
+    100% { left: 105%; }
+}
+
+@keyframes software-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 700px) {
+    .software-install-action,
+    .software-install-progress {
+        width: 100%;
+        min-width: 0;
+        align-items: stretch;
+    }
+
+    .software-install-result.error {
+        max-width: none;
+        text-align: left;
+    }
+}
+
+
+/* =========================================================
+   INSTALLED APPLICATION ACTIONS / UNINSTALL
+   ========================================================= */
+
+.software-actions-column {
+    width: 150px;
+    text-align: right !important;
+}
+
+.software-uninstall-action {
+    min-width: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.software-uninstall-button {
+    min-height: 31px;
+    padding: 0 10px;
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #b91c1c;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.software-uninstall-button:hover {
+    border-color: #fca5a5;
+    background: #fef2f2;
+    color: #991b1b;
+}
+
+.software-uninstall-button:disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+
+.software-uninstall-progress {
+    width: 140px;
+    display: none;
+}
+
+.software-uninstall-progress.active {
+    display: block;
+}
+
+.software-uninstall-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+.software-uninstall-message {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.software-uninstall-progress-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 42%;
+    border-radius: inherit;
+    background: #dc2626;
+    animation: software-progress 1.05s ease-in-out infinite;
+}
+
+.software-uninstall-result {
+    min-height: 14px;
+    max-width: 160px;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.software-uninstall-result.success {
+    color: #15803d;
+}
+
+.software-uninstall-result.error {
+    color: #b91c1c;
+}
+
+.software-row-removed {
+    opacity: 0.55;
+    transition: opacity 0.2s ease;
+}
+
+@media (max-width: 700px) {
+
+    .software-uninstall-action,
+    .software-uninstall-progress {
+        width: 100%;
+        min-width: 120px;
+        align-items: stretch;
+    }
+
+    .software-uninstall-result {
+        max-width: none;
+        text-align: left;
+    }
+}
+
+
+/* =========================================================
+   SOFTWARE UPDATES
+   ========================================================= */
+
+.software-row-actions {
+    min-width: 155px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.software-update-action {
+    min-width: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.software-update-button {
+    min-height: 31px;
+    min-width: 76px;
+    padding: 0 10px;
+    border: 1px solid #bfdbfe;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.software-update-button:hover {
+    border-color: #93c5fd;
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.software-update-button:disabled {
+    cursor: default;
+    opacity: 0.55;
+}
+
+.software-update-progress {
+    width: 140px;
+    display: none;
+}
+
+.software-update-progress.active {
+    display: block;
+}
+
+.software-update-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+.software-update-message {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.software-update-progress-bar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 42%;
+    border-radius: inherit;
+    background: #2563eb;
+    animation: software-progress 1.05s ease-in-out infinite;
+}
+
+.software-update-result {
+    min-height: 14px;
+    max-width: 160px;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.software-update-result.success {
+    color: #15803d;
+}
+
+.software-update-result.error {
+    color: #b91c1c;
+}
+
+.software-update-all-panel {
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 0;
+}
+
+.software-update-all-information {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.software-update-all-information strong {
+    color: #1f2937;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.software-update-all-information span {
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+.software-update-all-action {
+    min-width: 155px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.software-update-all-button {
+    min-width: 96px;
+}
+
+.software-update-all-progress {
+    width: 155px;
+    display: none;
+}
+
+.software-update-all-progress.active {
+    display: block;
+}
+
+.software-update-all-message {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.software-update-all-result {
+    min-height: 14px;
+    max-width: 190px;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.software-update-all-result.success {
+    color: #15803d;
+}
+
+.software-update-all-result.error {
+    color: #b91c1c;
+}
+
+.software-update-empty {
+    min-height: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+}
+
+.software-update-empty strong {
+    color: #15803d;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.software-update-empty span {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+/* =========================================================
+   DETAILED UPDATE ERRORS
+   ========================================================= */
+
+.software-update-result.error {
+    max-width: 230px;
+
+    padding: 7px 9px;
+
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    font-size: 8px;
+    font-weight: 650;
+    line-height: 1.45;
+
+    text-align: left;
+}
+
+/* =========================================================
+   PACKAGE TOOLS
+   ========================================================= */
+
+.software-tool-row {
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.software-tool-row:last-child {
+    border-bottom: none;
+}
+
+
+.software-tool-information {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.software-tool-information strong {
+    color: #1f2937;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.software-tool-information span {
+    max-width: 360px;
+
+    color: #64748b;
+
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+
+.software-tool-action {
+    min-width: 150px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    gap: 7px;
+}
+
+
+.software-tool-button {
+    min-width: 86px;
+}
+
+
+.software-tool-progress {
+    width: 150px;
+
+    display: none;
+}
+
+
+.software-tool-progress.active {
+    display: block;
+}
+
+
+.software-tool-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 7px;
+
+    margin-bottom: 6px;
+}
+
+
+.software-tool-message {
+    color: #64748b;
+
+    font-size: 8px;
+    font-weight: 650;
+}
+
+
+.software-tool-result {
+    min-height: 14px;
+
+    max-width: 180px;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    text-align: right;
+}
+
+
+.software-tool-result.success {
+    color: #15803d;
+}
+
+
+.software-tool-result.error {
+    color: #b91c1c;
+}
+
+
+@media (max-width: 700px) {
+
+    .software-tool-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .software-tool-action,
+    .software-tool-progress {
+        width: 100%;
+        min-width: 0;
+
+        align-items: stretch;
+    }
+
+
+    .software-tool-result {
+        max-width: none;
+
+        text-align: left;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .software-row-actions,
+    .software-update-action,
+    .software-update-progress,
+    .software-update-all-action,
+    .software-update-all-progress {
+        width: 100%;
+        min-width: 120px;
+        align-items: stretch;
+    }
+
+    .software-update-all-panel {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .software-update-result,
+    .software-update-all-result {
+        max-width: none;
+        text-align: left;
+    }
+}
+
+/* =========================================================
+   PACKAGE TOOL DIAGNOSTICS
+   ========================================================= */
+
+.software-tool-result small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: inherit;
+
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+/* Progressive software loading */
+.software-progressive-loading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 180px;
+    padding: 28px;
+    border: 1px solid var(--border-color, #354052);
+    border-radius: 12px;
+    margin-top: 20px;
+}
+.software-progressive-loading p { margin: 7px 0 0; opacity: .72; }
+.software-progressive-spinner {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    border: 3px solid rgba(128, 145, 165, .25);
+    border-top-color: #4a9eff;
+    border-radius: 50%;
+    animation: software-progressive-spin .8s linear infinite;
+}
+@keyframes software-progressive-spin { to { transform: rotate(360deg); } }
+.software-progressive-error { border-color: #b94b4b; }

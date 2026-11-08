@@ -1,0 +1,39 @@
+{
+  "category": "Users & Sign-in Security",
+  "description": "Sign-in hardening and reduced user information exposure. These policies are not intended to speed up sign-in.",
+  "policies": [
+    {
+      "id": "hide-last-user",
+      "name": "Do Not Display Last Signed-in User",
+      "description": "Hides the last signed-in username from the Windows sign-in screen; users must enter their username.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "registryValue": "DontDisplayLastUserName",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+    {
+      "id": "hide-local-user-list",
+      "name": "Do Not Enumerate Local Users on Domain-Joined Computers",
+      "description": "Prevents listing local accounts on domain-joined computers at sign-in; may not affect standalone PCs.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\System",
+      "registryValue": "EnumerateLocalUsers",
+      "registryType": "REG_DWORD",
+      "enabledValue": "0"
+    },
+    {
+      "id": "require-cad",
+      "name": "Require Ctrl+Alt+Delete for Interactive Sign-in",
+      "description": "Requires Ctrl+Alt+Delete before signing in where supported; can affect convenience and accessibility.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "registryValue": "DisableCAD",
+      "registryType": "REG_DWORD",
+      "enabledValue": "0"
+    }
+  ]
+}

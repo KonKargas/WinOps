@@ -1,0 +1,612 @@
+/* =========================================================
+   SYSTEM PAGE
+   WinOps Manager
+   ========================================================= */
+/* =========================================================
+   SYSTEM HEADER ACTIONS
+   ========================================================= */
+
+.system-page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.system-header-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+.system-header-actions form {
+    margin: 0;
+}
+
+
+.system-header-button {
+    min-width: 76px;
+    min-height: 36px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.system-header-button:hover {
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+}
+
+
+/* Restart */
+
+.system-header-warning {
+    border-color: #f59e0b;
+
+    color: #b45309;
+}
+
+
+.system-header-warning:hover {
+    background: #fffbeb;
+
+    border-color: #d97706;
+
+    color: #92400e;
+}
+
+
+/* Shutdown */
+
+.system-header-danger {
+    border-color: #ef4444;
+
+    color: #dc2626;
+}
+
+
+.system-header-danger:hover {
+    background: #fef2f2;
+
+    border-color: #dc2626;
+
+    color: #b91c1c;
+}
+
+/* =========================================================
+   OVERVIEW GRID
+   ========================================================= */
+
+.system-overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 24px;
+}
+
+
+.system-stat-card {
+    min-height: 118px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 19px 21px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.system-stat-label {
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+
+.system-stat-card strong {
+    color: #111827;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+.system-stat-card small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   SYSTEM GRID
+   ========================================================= */
+
+.system-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    align-items: start;
+}
+
+.system-column {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SYSTEM CARD
+   ========================================================= */
+
+.system-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.system-card-header {
+    padding: 20px 22px 17px;
+
+    background: #fafbfc;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.system-card-header h2 {
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.system-card-header p {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+.system-card-content {
+    padding: 4px 22px;
+}
+
+
+/* =========================================================
+   INFORMATION ROW
+   ========================================================= */
+
+.system-info-row {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.system-info-row:last-child {
+    border-bottom: none;
+}
+
+
+.system-info-description {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.system-info-description strong {
+    color: #1f2937;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.system-info-description span {
+    color: #64748b;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+.system-info-value {
+    max-width: 55%;
+
+    color: #111827;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   CONFIGURATION ACTION
+   ========================================================= */
+
+.system-action-row {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.system-action-row:last-child {
+    border-bottom: none;
+}
+
+
+.system-action-information {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.system-action-information strong {
+    color: #1f2937;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.system-action-information span {
+    max-width: 420px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+.system-action-row form {
+    flex-shrink: 0;
+}
+
+
+/* Make links and buttons consistent */
+
+.system-action-row .button-primary,
+.system-action-row .button-secondary {
+    min-width: 92px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+
+.system-warning-message {
+    margin-top: 11px;
+
+    padding: 9px 11px;
+
+    background: #fffbeb;
+
+    border: 1px solid #fde68a;
+    border-radius: 6px;
+
+    color: #92400e;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+/* =========================================================
+   EDITABLE SYSTEM SETTINGS
+   ========================================================= */
+
+.system-setting-block {
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.system-setting-block:last-child {
+    border-bottom: none;
+}
+
+
+.system-setting-form {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 13px;
+}
+
+
+.system-input,
+.system-select {
+    width: 100%;
+    min-height: 38px;
+
+    padding: 0 11px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.system-input:focus,
+.system-select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+.system-select {
+    cursor: pointer;
+}
+
+
+.system-setting-form .button-primary {
+    min-width: 90px;
+
+    flex-shrink: 0;
+}
+
+
+.system-current-value {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+
+.system-current-value strong {
+    color: #374151;
+}
+
+
+.system-success-message {
+    margin-top: 11px;
+
+    padding: 9px 11px;
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+
+    color: #166534;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+@media (max-width: 700px) {
+
+    .system-setting-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .system-setting-form .button-primary {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .system-overview {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .system-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .system-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .system-action-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .system-action-row form,
+    .system-action-row .button-primary,
+    .system-action-row .button-secondary {
+        width: 100%;
+    }
+
+    .system-info-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+    .system-info-value {
+        max-width: 100%;
+
+        text-align: left;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .system-page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .system-header-actions {
+        width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+
+    .system-header-actions form {
+        flex: 1;
+    }
+
+
+    .system-header-button {
+        width: 100%;
+    }
+}
+/* Progressive system information loading */
+.system-loading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px;
+    margin-top: 22px;
+    border: 1px solid var(--border-color, #334155);
+    border-radius: 12px;
+}
+.system-loading p { margin: 6px 0 0; opacity: .7; }
+.system-loading-spinner {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border: 3px solid #64748b;
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: system-loading-spin .8s linear infinite;
+}
+@keyframes system-loading-spin { to { transform: rotate(360deg); } }
+.system-loading-error button { margin-top: 12px; cursor: pointer; }

@@ -1,0 +1,83 @@
+{
+  "category": "USB & Removable Storage",
+  "description": "Control USB devices and removable storage behavior.",
+
+  "policies": [
+
+    {
+      "id": "disable-autorun",
+      "name": "Disable AutoRun",
+      "description": "Disables AutoRun for all drive types.",
+      "requiresAdmin": true,
+
+      "scope": "COMPUTER",
+
+      "registryPath": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+      "registryValue": "NoDriveTypeAutoRun",
+      "registryType": "REG_DWORD",
+
+      "enabledValue": "255"
+    },
+	
+	{
+	  "id": "device-installation-custom-message",
+	  "name": "Display a Custom Message When Installation Is Prevented",
+	  "description": "Displays a custom message when Windows prevents a device installation because of a policy setting.",
+	  "requiresAdmin": true,
+
+	  "scope": "COMPUTER",
+
+	  "registryPath": "Software\\Policies\\Microsoft\\Windows\\DeviceInstall\\Restrictions\\DeniedPolicy",
+	  "registryValue": "DetailText",
+	  "registryType": "REG_SZ",
+
+	  "enabledValue": "Device installation has been prevented by your system administrator."
+	},
+	
+	{
+	  "id": "device-installation-custom-message-title",
+	  "name": "Display a Custom Message Title When Installation Is Prevented",
+	  "description": "Displays a custom title when Windows prevents a device installation because of a policy setting.",
+	  "requiresAdmin": true,
+
+	  "scope": "COMPUTER",
+
+	  "registryPath": "Software\\Policies\\Microsoft\\Windows\\DeviceInstall\\Restrictions\\DeniedPolicy",
+	  "registryValue": "SimpleText",
+	  "registryType": "REG_SZ",
+
+	  "enabledValue": "Device Installation Blocked"
+	},
+
+    {
+      "id": "prevent-removable-device-installation",
+      "name": "Prevent Installation of Removable Devices",
+      "description": "Prevents Windows from installing removable devices and updating their drivers.",
+      "requiresAdmin": true,
+
+      "scope": "COMPUTER",
+
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\DeviceInstall\\Restrictions",
+      "registryValue": "DenyRemovableDevices",
+      "registryType": "REG_DWORD",
+
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "prevent-unspecified-device-installation",
+      "name": "Prevent Installation of Unspecified Devices",
+      "description": "Prevents installation of devices that are not explicitly allowed by another device installation policy.",
+      "requiresAdmin": true,
+
+      "scope": "COMPUTER",
+
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\DeviceInstall\\Restrictions",
+      "registryValue": "DenyUnspecified",
+      "registryType": "REG_DWORD",
+
+      "enabledValue": "1"
+    }
+
+  ]
+}

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+            <!-- SYSTEM OVERVIEW -->
+
+            <section class="system-overview">
+
+
+                <div class="system-stat-card">
+
+                    <span class="system-stat-label">
+                        Computer
+                    </span>
+
+                    <strong th:text="${system.computerName}">
+                        COMPUTER
+                    </strong>
+
+                    <small>
+                        Local machine
+                    </small>
+
+                </div>
+
+
+                <div class="system-stat-card">
+
+                    <span class="system-stat-label">
+                        Windows
+                    </span>
+
+                    <strong th:text="${system.windowsEdition}">
+                        Windows
+                    </strong>
+
+                    <small>
+                        Build
+                        <span th:text="${system.windowsBuild}">
+                            00000
+                        </span>
+                    </small>
+
+                </div>
+
+
+                <div class="system-stat-card">
+
+                    <span class="system-stat-label">
+                        Processor
+                    </span>
+
+                    <strong th:text="${system.processor}">
+                        Processor
+                    </strong>
+
+                    <small th:text="${system.architecture}">
+                        Architecture
+                    </small>
+
+                </div>
+
+
+                <div class="system-stat-card">
+
+                    <span class="system-stat-label">
+                        Installed Memory
+                    </span>
+
+                    <strong th:text="${system.installedRam}">
+                        0 GB
+                    </strong>
+
+                    <small>
+                        Physical RAM
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <div class="system-grid">
+
+                <!-- LEFT COLUMN -->
+                <div class="system-column">
+
+                    <!-- SYSTEM INFORMATION -->
+
+                <section class="system-card">
+
+                    <div class="system-card-header">
+
+                        <span class="page-label">
+                            OVERVIEW
+                        </span>
+
+                        <h2>
+                            System Information
+                        </h2>
+
+                        <p>
+                            Hardware and Windows information
+                            reported by this computer.
+                        </p>
+
+                    </div>
+
+
+                    <div class="system-card-content">
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    Manufacturer
+                                </strong>
+
+                                <span>
+                                    Computer manufacturer
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value"
+                                  th:text="${system.manufacturer}">
+                                Unknown
+                            </span>
+
+                        </div>
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    Model
+                                </strong>
+
+                                <span>
+                                    Computer model
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value"
+                                  th:text="${system.model}">
+                                Unknown
+                            </span>
+
+                        </div>
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    Windows Version
+                                </strong>
+
+                                <span>
+                                    Installed operating system version
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value"
+                                  th:text="${system.windowsVersion}">
+                                Unknown
+                            </span>
+
+                        </div>
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    BIOS Version
+                                </strong>
+
+                                <span>
+                                    Current system firmware
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value"
+                                  th:text="${system.biosVersion}">
+                                Unknown
+                            </span>
+
+                        </div>
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    System Drive
+                                </strong>
+
+                                <span>
+                                    Windows installation drive
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value">
+
+                                <span th:text="${system.systemDrive}">
+                                    C:
+                                </span>
+
+                                ·
+
+                                <span th:text="${system.systemDriveFreeSpace}">
+                                    0 GB
+                                </span>
+
+                                free
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="system-info-row">
+
+                            <div class="system-info-description">
+
+                                <strong>
+                                    Uptime
+                                </strong>
+
+                                <span>
+                                    Time since the last system boot
+                                </span>
+
+                            </div>
+
+                            <span class="system-info-value"
+                                  th:text="${system.uptime}">
+                                Unknown
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                    <!-- POWER CONFIGURATION -->
+
+				<section class="system-card">
+				
+				    <div class="system-card-header">
+				
+				        <span class="page-label">
+				            POWER
+				        </span>
+				
+				        <h2>
+				            Power Configuration
+				        </h2>
+				
+				        <p>
+				            Configure the active Windows power plan,
+				            display timeout, sleep and hibernation.
+				        </p>
+				
+				    </div>
+				
+				
+				    <div class="system-card-content">
+				
+				
+				        <!-- POWER PLAN -->
+				
+				        <div class="system-setting-block">
+				
+				            <div class="system-action-information">
+				
+				                <strong>
+				                    Power Plan
+				                </strong>
+				
+				                <span>
+				                    Select the active Windows power plan.
+				                </span>
+				
+				            </div>
+				
+				
+				            <form th:action="@{/system/power-plan}"
+				                  method="post"
+				                  class="system-setting-form">
+				
+				                <select name="powerPlan"
+				                        class="system-select"
+				                        required>
+				
+				                    <option value="BALANCED">
+				                        Balanced
+				                    </option>
+				
+				                    <option value="HIGH_PERFORMANCE">
+				                        High Performance
+				                    </option>
+				
+				                    <option value="POWER_SAVER">
+				                        Power Saver
+				                    </option>
+				
+				                </select>
+				
+				
+				                <button type="submit"
+				                        class="button-primary">
+				                    Apply
+				                </button>
+				
+				            </form>
+				
+				
+				            <div class="system-current-value">
+				                Current:
+				                <strong th:text="${system.activePowerPlan}">
+				                    Unknown
+				                </strong>
+				            </div>
+				
+				
+				            <div class="system-success-message"
+				                 th:if="${param.powerPlanSuccess}">
+				                Power plan updated successfully.
+				            </div>
+				
+				        </div>
+				
+				
+				        <!-- DISPLAY TIMEOUT -->
+				
+				        <div class="system-setting-block">
+				
+				            <div class="system-action-information">
+				
+				                <strong>
+				                    Display Timeout
+				                </strong>
+				
+				                <span>
+				                    Turn off the display after this
+				                    amount of inactivity while plugged in.
+				                    Use 0 for Never.
+				                </span>
+				
+				            </div>
+				
+				
+				            <form th:action="@{/system/display-timeout}"
+				                  method="post"
+				                  class="system-setting-form">
+				
+				                <input type="number"
+				                       name="minutes"
+				                       class="system-input"
+				                       min="0"
+				                       max="1440"
+				                       th:value="${system.displayTimeoutAc}"
+				                       required>
+				
+				                <span class="system-input-unit">
+				                    minutes
+				                </span>
+				
+				                <button type="submit"
+				                        class="button-primary">
+				                    Apply
+				                </button>
+				
+				            </form>
+				
+				
+				            <div class="system-success-message"
+				                 th:if="${param.displayTimeoutSuccess}">
+				                Display timeout updated successfully.
+				            </div>
+				
+				        </div>
+				
+				
+				        <!-- SLEEP TIMEOUT -->
+				
+				        <div class="system-setting-block">
+				
+				            <div class="system-action-information">
+				
+				                <strong>
+				                    Sleep Timeout
+				                </strong>
+				
+				                <span>
+				                    Put the computer to sleep after this
+				                    amount of inactivity while plugged in.
+				                    Use 0 for Never.
+				                </span>
+				
+				            </div>
+				
+				
+				            <form th:action="@{/system/sleep-timeout}"
+				                  method="post"
+				                  class="system-setting-form">
+				
+				                <input type="number"
+				                       name="minutes"
+				                       class="system-input"
+				                       min="0"
+				                       max="1440"
+				                       th:value="${system.sleepTimeoutAc}"
+				                       required>
+				
+				                <span class="system-input-unit">
+				                    minutes
+				                </span>
+				
+				                <button type="submit"
+				                        class="button-primary">
+				                    Apply
+				                </button>
+				
+				            </form>
+				
+				
+				            <div class="system-success-message"
+				                 th:if="${param.sleepTimeoutSuccess}">
+				                Sleep timeout updated successfully.
+				            </div>
+				
+				        </div>
+				
+				
+				        <!-- HIBERNATE -->
+				
+				        <div class="system-setting-block">
+				
+				            <div class="system-action-information">
+				
+				                <strong>
+				                    Hibernate
+				                </strong>
+				
+				                <span>
+				                    Enable or disable Windows hibernation.
+				                </span>
+				
+				            </div>
+				
+				
+				            <form th:action="@{/system/hibernate}"
+				                  method="post"
+				                  class="system-setting-form">
+				
+				                <select name="enabled"
+				                        class="system-select">
+				
+				                    <option value="true"
+				                            th:selected="${system.hibernateEnabled}">
+				                        Enabled
+				                    </option>
+				
+				                    <option value="false"
+				                            th:selected="${!system.hibernateEnabled}">
+				                        Disabled
+				                    </option>
+				
+				                </select>
+				
+				
+				                <button type="submit"
+				                        class="button-primary">
+				                    Apply
+				                </button>
+				
+				            </form>
+				
+				
+				            <div class="system-current-value">
+				
+				                Current:
+				
+				                <strong th:text="${system.hibernateEnabled ? 'Enabled' : 'Disabled'}">
+				                    Unknown
+				                </strong>
+				
+				            </div>
+				
+				
+				            <div class="system-success-message"
+				                 th:if="${param.hibernateSuccess}">
+				                Hibernate setting updated successfully.
+				            </div>
+				
+				        </div>
+				
+				    </div>
+				
+				</section>
+
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="system-column">
+
+                    <!-- COMPUTER CONFIGURATION -->
+
+                <section class="system-card">
+
+                    <div class="system-card-header">
+
+                        <span class="page-label">
+                            CONFIGURATION
+                        </span>
+
+                        <h2>
+                            Computer Configuration
+                        </h2>
+
+                        <p>
+                            Configure Windows and access advanced
+                            system management tools.
+                        </p>
+
+                    </div>
+
+
+                    <div class="system-card-content">
+
+
+                        <!-- RENAME -->
+
+                        <!-- COMPUTER NAME -->
+
+						<div class="system-setting-block">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            Computer Name
+						        </strong>
+						
+						        <span>
+						            Rename this Windows computer.
+						            A restart is required to complete
+						            the change.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/computer-name}"
+						          method="post"
+						          class="system-setting-form">
+						
+						        <input type="text"
+						               name="computerName"
+						               class="system-input"
+						               th:value="${system.computerName}"
+						               maxlength="63"
+						               required>
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Rename
+						
+						        </button>
+						
+						    </form>
+						
+						
+						    <div class="system-success-message"
+						         th:if="${param.renameSuccess}">
+						
+						        Computer name changed successfully.
+						        Restart Windows to complete the change.
+						
+						    </div>
+						    
+						    <div class="system-warning-message"
+							     th:if="${param.sameComputerName}">
+							
+							    This is already the current computer name.
+							    No changes were made.
+							
+							</div>
+						
+						</div>
+
+
+                        <!-- TIME ZONE -->
+
+						<div class="system-setting-block">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            Time Zone
+						        </strong>
+						
+						        <span>
+						            Select the Windows time zone
+						            used by this computer.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/time-zone}"
+						          method="post"
+						          class="system-setting-form">
+						
+						        <select name="timeZoneId"
+						                class="system-select"
+						                required>
+						
+						            <option th:each="timeZone : ${timeZones}"
+						                    th:value="${timeZone.id}"
+						                    th:text="${timeZone.displayName}"
+						                    th:selected="${timeZone.id == system.timeZoneId}">
+						            </option>
+						
+						        </select>
+						
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Apply
+						
+						        </button>
+						
+						    </form>
+						
+						
+						    <div class="system-current-value">
+						
+						        Current:
+						
+						        <strong th:text="${system.timeZoneDisplayName}">
+						            Time Zone
+						        </strong>
+						
+						    </div>
+						
+						
+						    <div class="system-success-message"
+						         th:if="${param.timeZoneSuccess}">
+						
+						        Time zone updated successfully.
+						
+						    </div>
+						
+						</div>
+
+
+                        <!-- MSCONFIG -->
+
+                        <div class="system-action-row">
+
+                            <div class="system-action-information">
+
+                                <strong>
+                                    System Configuration
+                                </strong>
+
+                                <span>
+                                    Open the Windows System Configuration
+                                    utility (MSConfig).
+                                </span>
+
+                            </div>
+
+
+                            <form th:action="@{/system/msconfig}"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="button-primary">
+
+                                    Open
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- ENVIRONMENT VARIABLES -->
+
+                        <div class="system-action-row">
+
+                            <div class="system-action-information">
+
+                                <strong>
+                                    Environment Variables
+                                </strong>
+
+                                <span>
+                                    Open the Windows user and system
+                                    environment variable editor.
+                                </span>
+
+                            </div>
+
+
+                            <form th:action="@{/system/environment-variables}"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="button-primary">
+
+                                    Open
+
+                                </button>
+
+                            </form>
+
+                        </div>
+                        
+                        <!-- CHRIS TITUS DEBLOATING -->
+
+                        <div class="system-action-row">
+
+                            <div class="system-action-information">
+
+                                <strong>
+                                    Chris Titus Debloating
+                                </strong>
+
+                                <span>
+                                    Open the latest Chris Titus debloating tool.
+                                </span>
+
+                            </div>
+
+
+                            <form th:action="@{/system/debloating}"
+                                  method="post">
+
+                                <button type="submit"
+                                        class="button-primary">
+
+                                    Open
+
+                                </button>
+
+                            </form>
+
+                        </div>
+                        
+                        <!-- UEFI / BIOS -->
+
+						<div class="system-action-row">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            UEFI / BIOS
+						        </strong>
+						
+						        <span>
+						            Restart the computer and open
+						            the UEFI firmware settings.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/firmware}"
+						          method="post"
+						          onsubmit="return confirm(
+						              'The computer will restart immediately. Continue?'
+						          );">
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Restart to BIOS
+						
+						        </button>
+						
+						    </form>
+						
+						</div>
+
+                    </div>
+
+                </section>
+
+                    <!-- RECOVERY & SYSTEM REPAIR -->
+
+				<section class="system-card">
+				
+				    <div class="system-card-header">
+				
+				        <span class="page-label">
+				            RECOVERY
+				        </span>
+				
+				        <h2>
+				            Recovery & System Repair
+				        </h2>
+				
+				        <p>
+				            Access Windows recovery tools
+				            and repair system components.
+				        </p>
+				
+				    </div>
+				
+				
+				    <div class="system-card-content">
+				
+				
+				        <!-- SYSTEM RESTORE -->
+				
+				        <div class="system-action-row">
+				
+				            <div class="system-action-information">
+				
+				                <strong>
+				                    System Restore
+				                </strong>
+				
+				                <span>
+				                    Restore Windows to a previous
+				                    system restore point.
+				                </span>
+				
+				            </div>
+				
+				
+				            <form th:action="@{/system/system-restore}"
+				                  method="post">
+				
+				                <button type="submit"
+				                        class="button-primary">
+				
+				                    Open
+				
+				                </button>
+				
+				            </form>
+				
+				        </div>
+				        
+				        <!-- CREATE RESTORE POINT -->
+
+						<div class="system-action-row">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            Create Restore Point
+						        </strong>
+						
+						        <span>
+						            Open Windows System Protection
+						            to create and manage restore points.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/system-protection}"
+						          method="post">
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Open
+						
+						        </button>
+						
+						    </form>
+						
+						</div>
+						
+						<!-- SYSTEM FILE CHECKER -->
+
+						<div class="system-action-row">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            System File Checker
+						        </strong>
+						
+						        <span>
+						            Scan protected Windows system files
+						            and repair corrupted files using
+						            SFC /scannow.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/sfc}"
+						          method="post">
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Run SFC
+						
+						        </button>
+						
+						    </form>
+						
+						</div>
+						
+						<!-- DISM RESTORE HEALTH -->
+
+						<div class="system-action-row">
+						
+						    <div class="system-action-information">
+						
+						        <strong>
+						            Windows Image Repair
+						        </strong>
+						
+						        <span>
+						            Repair the Windows component store
+						            using DISM RestoreHealth.
+						        </span>
+						
+						    </div>
+						
+						
+						    <form th:action="@{/system/dism}"
+						          method="post">
+						
+						        <button type="submit"
+						                class="button-primary">
+						
+						            Run DISM
+						
+						        </button>
+						
+						    </form>
+						
+						</div>
+						
+						
+						<div class="system-success-message"
+						     th:if="${param.dismStarted}">
+						
+						    DISM RestoreHealth started in a
+						    separate command window.
+						
+						</div>
+												
+						
+						<div class="system-success-message"
+						     th:if="${param.sfcStarted}">
+						
+						    System File Checker started in a
+						    separate command window.
+						
+						</div>
+				
+				    </div>
+				
+				</section>
+
+                </div>
+
+            </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+{
+  "category": "Removable Storage Access",
+  "description": "Control read, write and execute access to removable storage devices.",
+
+  "policies": [
+
+    {
+      "id": "cd-dvd-deny-execute",
+      "name": "CD and DVD: Deny Execute Access",
+      "description": "Prevents execution of programs from CD and DVD removable storage.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Execute",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "cd-dvd-deny-read",
+      "name": "CD and DVD: Deny Read Access",
+      "description": "Prevents read access to CD and DVD removable storage.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Read",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "cd-dvd-deny-write",
+      "name": "CD and DVD: Deny Write Access",
+      "description": "Prevents write access to CD and DVD removable storage.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Write",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "floppy-deny-execute",
+      "name": "Floppy Drives: Deny Execute Access",
+      "description": "Prevents execution of programs from floppy drives, including USB floppy drives.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56311-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Execute",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "floppy-deny-read",
+      "name": "Floppy Drives: Deny Read Access",
+      "description": "Prevents read access to floppy drives, including USB floppy drives.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56311-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Read",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "floppy-deny-write",
+      "name": "Floppy Drives: Deny Write Access",
+      "description": "Prevents write access to floppy drives, including USB floppy drives.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f56311-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Write",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "removable-disks-deny-execute",
+      "name": "Removable Disks: Deny Execute Access",
+      "description": "Prevents execution of programs from removable disks.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Execute",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "removable-disks-deny-read",
+      "name": "Removable Disks: Deny Read Access",
+      "description": "Prevents read access to removable disks.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Read",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "removable-disks-deny-write",
+      "name": "Removable Disks: Deny Write Access",
+      "description": "Prevents write access to removable disks.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}",
+      "registryValue": "Deny_Write",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "all-removable-storage-deny-all",
+      "name": "All Removable Storage Classes: Deny All Access",
+      "description": "Denies all access to all removable storage classes. This policy takes precedence over individual removable storage policies.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices",
+      "registryValue": "Deny_All",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "wpd-deny-read",
+      "name": "WPD Devices: Deny Read Access",
+      "description": "Prevents read access to Windows Portable Devices such as phones, media players and similar devices.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{6AC27878-A6FA-4155-BA85-F98F491D4F33}",
+      "registryValue": "Deny_Read",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+
+    {
+      "id": "wpd-deny-write",
+      "name": "WPD Devices: Deny Write Access",
+      "description": "Prevents write access to Windows Portable Devices such as phones, media players and similar devices.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\{6AC27878-A6FA-4155-BA85-F98F491D4F33}",
+      "registryValue": "Deny_Write",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    }
+
+  ]
+}

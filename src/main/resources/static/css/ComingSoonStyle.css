@@ -1,0 +1,192 @@
+/* =========================================================
+   COMING SOON PAGE
+   WinOps Manager
+   ========================================================= */
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.coming-soon-container {
+    min-height: calc(100vh - 180px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px 20px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.coming-soon-card {
+    width: 100%;
+    max-width: 620px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 55px 50px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03),
+        0 8px 30px rgba(15, 23, 42, 0.04);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.coming-soon-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 24px;
+
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+}
+
+
+.coming-soon-icon span {
+    position: relative;
+
+    top: -4px;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.coming-soon-card h1 {
+    margin-top: 8px;
+    margin-bottom: 12px;
+
+    color: #111827;
+
+    font-size: 28px;
+    font-weight: 750;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.coming-soon-card p {
+    max-width: 470px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.coming-soon-status {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 24px;
+
+    padding: 7px 11px;
+
+    border: 1px solid #dbeafe;
+    border-radius: 999px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.coming-soon-status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+}
+
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.coming-soon-button {
+    min-width: 145px;
+
+    margin-top: 28px;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .coming-soon-container {
+        min-height: calc(100vh - 150px);
+
+        padding: 20px 0;
+    }
+
+
+    .coming-soon-card {
+        padding: 40px 24px;
+    }
+
+
+    .coming-soon-card h1 {
+        font-size: 24px;
+    }
+
+
+    .coming-soon-button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,50 @@
+{
+  "category": "Apps & Background Performance",
+  "description": "Reduce background activity and optional consumer features. Some settings may be edition- or version-dependent.",
+  "policies": [
+    {
+      "id": "apps-background-deny",
+      "name": "Prevent Windows Apps from Running in Background",
+      "description": "Force-denies background execution for packaged Windows apps. May delay notifications and background sync; does not stop all desktop applications.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+      "registryValue": "LetAppsRunInBackground",
+      "registryType": "REG_DWORD",
+      "enabledValue": "2"
+    },
+    {
+      "id": "consumer-features-off",
+      "name": "Disable Microsoft Consumer Experiences",
+      "description": "Disables Microsoft consumer experience suggestions and automatic promotional app provisioning where supported. Does not remove existing apps.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\CloudContent",
+      "registryValue": "DisableWindowsConsumerFeatures",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    },
+    {
+      "id": "game-dvr-off",
+      "name": "Disable Windows Game Recording and Broadcasting",
+      "description": "Disables Windows Game DVR recording/broadcasting where supported; does not uninstall Xbox Game Bar.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\GameDVR",
+      "registryValue": "AllowGameDVR",
+      "registryType": "REG_DWORD",
+      "enabledValue": "0"
+    },
+    {
+      "id": "copilot-off",
+      "name": "Turn Off Windows Copilot (Legacy Policy)",
+      "description": "Legacy Windows Copilot policy; may not affect newer Copilot app releases or all Windows 11 versions.",
+      "requiresAdmin": true,
+      "scope": "COMPUTER",
+      "registryPath": "Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+      "registryValue": "TurnOffWindowsCopilot",
+      "registryType": "REG_DWORD",
+      "enabledValue": "1"
+    }
+  ]
+}

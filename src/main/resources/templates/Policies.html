@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Restore sidebar state before the page is painted. -->
+    <script>
+        try {
+            if (localStorage.getItem("winops.sidebar.collapsed") === "true") {
+                document.documentElement.classList.add("winops-sidebar-collapsed");
+            }
+        } catch (error) {
+            // Continue with the default expanded layout.
+        }
+    </script>
+
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Policies | WinOps Manager</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+
+    <!-- ============================= -->
+    <!-- GLOBAL STYLE                  -->
+    <!-- ============================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+
+    <!-- ============================= -->
+    <!-- POLICIES STYLE                -->
+    <!-- ============================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/PoliciesStyle.css}">
+
+
+    <!-- ============================= -->
+    <!-- POLICY TOGGLE SCRIPT          -->
+    <!-- ============================= -->
+
+    <script th:src="@{/js/toggle.js}"
+            defer>
+    </script>
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR                                               -->
+    <!-- ===================================================== -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- APPLICATION CONTENT                                   -->
+    <!-- ===================================================== -->
+
+    <div class="app-content">
+
+
+        <!-- ================================================= -->
+        <!-- TOP BAR                                           -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- MAIN PAGE                                         -->
+        <!-- ================================================= -->
+
+        <main class="page-content">
+
+
+            <!-- ============================================= -->
+            <!-- PAGE HEADER                                   -->
+            <!-- ============================================= -->
+
+            <section class="page-heading">
+
+
+                <div>
+
+                    <span class="page-label">
+                        POLICIES
+                    </span>
+
+
+                    <h1>
+                        Local Group Policies
+                    </h1>
+
+
+                    <p>
+                        Configure Windows Local Group Policies
+                        for this computer.
+                        Changes require administrator privileges.
+                    </p>
+
+                </div>
+
+
+
+                <button class="refresh-button"
+                        type="button"
+                        onclick="window.location.reload()">
+
+                    Refresh
+
+                </button>
+
+
+            </section>
+
+
+
+            <!-- ============================================= -->
+            <!-- POLICY CATEGORIES                             -->
+            <!-- ============================================= -->
+
+            <div class="policy-container">
+
+
+                <section class="policy-category"
+                         th:each="category : ${categories}"
+                         th:attr="data-category=${category.category}">
+
+
+                    <!-- ===================================== -->
+                    <!-- CATEGORY HEADER                       -->
+                    <!-- ===================================== -->
+
+                    <div class="category-header"
+                         role="button"
+                         tabindex="0"
+                         onclick="toggleCategory(this)"
+                         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleCategory(this); }">
+
+
+                        <div>
+
+                            <span class="category-label">
+                                POLICY GROUP
+                            </span>
+
+
+                            <h2 th:text="${category.category}">
+                                Policy Category
+                            </h2>
+
+
+                            <p th:text="${category.description}">
+                                Configure Windows policies.
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="category-header-right">
+
+
+                            <span class="policy-count"
+                                  th:text="${category.policies.size()
+                                  + ' policies'}">
+
+                                0 policies
+
+                            </span>
+
+
+                            <span class="category-arrow"
+                                  aria-hidden="true">
+                                ▼
+                            </span>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ===================================== -->
+                    <!-- POLICY LIST                           -->
+                    <!-- ===================================== -->
+
+                    <div class="policy-list">
+
+
+                        <div class="policy-row"
+                             th:each="policy : ${category.policies}"
+                             th:attr="data-policy-id=${policy.id}">
+
+
+                            <!-- ============================= -->
+                            <!-- POLICY INFORMATION            -->
+                            <!-- ============================= -->
+
+                            <div class="policy-information">
+
+
+                                <div class="policy-title-row">
+
+
+                                    <h3 th:text="${policy.name}">
+                                        Policy Name
+                                    </h3>
+
+
+                                    <span class="admin-required"
+                                          th:if="${policy.requiresAdmin}">
+
+                                        ADMIN
+
+                                    </span>
+
+
+                                </div>
+
+
+
+                                <p th:text="${policy.description}">
+                                    Policy description.
+                                </p>
+
+
+
+                                <!-- ========================= -->
+                                <!-- TECHNICAL DETAILS         -->
+                                <!-- ========================= -->
+
+                                <details class="technical-details">
+
+
+                                    <summary>
+                                        Technical details
+                                    </summary>
+
+
+                                    <div class="technical-content">
+
+
+                                        <!-- SCOPE -->
+
+                                        <div class="technical-item">
+
+                                            <span>
+                                                Scope
+                                            </span>
+
+                                            <code th:text="${policy.scope}">
+                                                COMPUTER
+                                            </code>
+
+                                        </div>
+
+
+
+                                        <!-- REGISTRY PATH -->
+
+                                        <div class="technical-item">
+
+                                            <span>
+                                                Registry
+                                            </span>
+
+                                            <code th:text="${policy.registryPath}">
+                                            </code>
+
+                                        </div>
+
+
+
+                                        <!-- REGISTRY VALUE -->
+
+                                        <div class="technical-item">
+
+                                            <span>
+                                                Value
+                                            </span>
+
+                                            <code th:text="${policy.registryValue}">
+                                            </code>
+
+                                        </div>
+
+
+
+                                        <!-- REGISTRY TYPE -->
+
+                                        <div class="technical-item">
+
+                                            <span>
+                                                Type
+                                            </span>
+
+                                            <code th:text="${policy.registryType}">
+                                            </code>
+
+                                        </div>
+
+
+
+                                        <!-- ENABLED VALUE -->
+
+                                        <div class="technical-item">
+
+                                            <span>
+                                                Enabled Value
+                                            </span>
+
+                                            <code th:text="${policy.enabledValue}">
+                                            </code>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </details>
+
+
+                            </div>
+
+
+
+                            <!-- ============================= -->
+                            <!-- POLICY CONTROL                -->
+                            <!-- ============================= -->
+
+                            <div class="policy-control">
+
+
+                                <!-- ========================= -->
+                                <!-- POLICY STATE              -->
+                                <!-- ========================= -->
+
+                                <span class="policy-state"
+
+                                      th:classappend=
+                                      "${policy.policyState.name()
+                                      == 'ENABLED'}
+                                      ? ' enabled'
+                                      : ' disabled'"
+
+                                      th:text=
+                                      "${policy.policyState.name()
+                                      == 'ENABLED'}
+                                      ? 'Enabled'
+                                      : 'Not Configured'">
+
+                                    Not Configured
+
+                                </span>
+
+
+
+                                <div class="policy-value-picker"
+                                     th:if="${policy.id == 'apps-background-deny'}">
+                                    <label th:for="${'value-' + policy.id}">Background app behavior</label>
+                                    <select th:id="${'value-' + policy.id}"
+                                            class="policy-value-select"
+                                            th:attr="data-current=${policy.configuredValue}">
+                                        <option value="0">User is in control</option>
+                                        <option value="1">Force Allow</option>
+                                        <option value="2">Force Deny</option>
+                                    </select>
+                                    <button type="button" class="policy-value-apply">Apply value</button>
+                                </div>
+
+                                <!-- ========================= -->
+                                <!-- TOGGLE FORM               -->
+                                <!-- ========================= -->
+
+                                <form th:action="@{/policies/toggle}"
+                                      method="post">
+
+
+                                    <input th:if="${policy.id == 'apps-background-deny'}"
+                                           type="hidden" name="selectedValue" value="2">
+
+                                    <!-- POLICY ID -->
+
+                                    <input type="hidden"
+                                           name="policyId"
+                                           th:value="${policy.id}">
+
+
+
+                                    <!--
+                                        If currently ENABLED:
+                                            next click = false
+                                            -> NOT_CONFIGURED
+
+                                        Otherwise:
+                                            next click = true
+                                            -> ENABLED
+                                    -->
+
+                                    <input type="hidden"
+                                           name="enabled"
+
+                                           th:value=
+                                           "${policy.policyState.name()
+                                           != 'ENABLED'}">
+
+
+
+                                    <!-- ===================== -->
+                                    <!-- TOGGLE SWITCH         -->
+                                    <!-- ===================== -->
+
+                                    <button type="submit"
+                                            class="switch"
+
+                                            th:classappend=
+                                            "${policy.policyState.name()
+                                            == 'ENABLED'}
+                                            ? ' active'
+                                            : ''"
+
+                                            th:attr=
+                                            "aria-label=
+                                            'Toggle ' + ${policy.name}">
+
+
+                                        <span class="switch-slider">
+                                        </span>
+
+
+                                    </button>
+
+
+                                </form>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+        </main>
+
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER                                            -->
+        <!-- ================================================= -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

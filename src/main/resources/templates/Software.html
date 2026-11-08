@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Restore sidebar state before the page is painted. -->
+    <script>
+        try {
+            if (localStorage.getItem("winops.sidebar.collapsed") === "true") {
+                document.documentElement.classList.add("winops-sidebar-collapsed");
+            }
+        } catch (error) {
+            // Continue with the default expanded layout.
+        }
+    </script>
+
+
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Software | WinOps Manager</title>
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
+	<link rel="shortcut icon" href="images/favicon.ico?v=2">
+
+    <link rel="stylesheet"
+          th:href="@{/css/GlobalStyle.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/SoftwareStyle.css}">
+          
+   	<script th:src="@{/js/software.js}"
+            defer>
+    </script>
+    
+    <script th:src="@{/js/software-progressive.js}" defer></script>
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+
+    <div class="app-content">
+
+
+        <!-- TOP BAR -->
+
+        <div th:replace="~{fragments/topbar :: topbar}">
+        </div>
+
+
+        <main class="page-content">
+
+
+            <!-- =====================================================
+                 PAGE HEADER
+                 ===================================================== -->
+
+            <section class="page-heading software-page-heading">
+
+                <div>
+
+                    <span class="page-label">
+                        SOFTWARE
+                    </span>
+
+                    <h1>
+                        Software Management
+                    </h1>
+
+                    <p>
+                        View installed applications,
+                        package information and software
+                        updates managed through Windows Package Manager.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <div id="software-progressive-content" aria-live="polite" aria-busy="true">
+                <div class="software-progressive-loading" role="status">
+                    <span class="software-progressive-spinner" aria-hidden="true"></span>
+                    <div>
+                        <strong>Loading software information...</strong>
+                        <p>Checking WinGet, installed applications and available updates.</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <div th:replace="~{fragments/footer :: footer}">
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

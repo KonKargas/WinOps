@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+            <section class="user-overview">
+
+
+                <!-- TOTAL USERS -->
+
+                <div class="user-stat-card">
+
+                    <span class="stat-label">
+                        Local Users
+                    </span>
+
+                    <strong th:text="${totalUsers}">
+                        0
+                    </strong>
+
+                    <span class="stat-description">
+                        Accounts on this computer
+                    </span>
+
+                </div>
+
+
+
+                <!-- ENABLED USERS -->
+
+                <div class="user-stat-card">
+
+                    <span class="stat-label">
+                        Enabled
+                    </span>
+
+                    <strong th:text="${enabledUsers}">
+                        0
+                    </strong>
+
+                    <span class="stat-description">
+                        Active local accounts
+                    </span>
+
+                </div>
+
+
+
+                <!-- ADMINISTRATORS -->
+
+                <div class="user-stat-card">
+
+                    <span class="stat-label">
+                        Administrators
+                    </span>
+
+                    <strong th:text="${administratorCount}">
+                        0
+                    </strong>
+
+                    <span class="stat-description">
+                        Local administrator accounts
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ============================================= -->
+            <!-- LOCAL ACCOUNTS                                -->
+            <!-- ============================================= -->
+
+            <section class="users-panel">
+
+
+                <!-- PANEL HEADER -->
+
+                <div class="users-panel-header">
+
+
+                    <div>
+
+                        <span class="section-label">
+                            WINDOWS ACCOUNTS
+                        </span>
+
+                        <h2>
+                            Local Accounts
+                        </h2>
+
+                        <p>
+                            Accounts currently configured
+                            on this computer.
+                        </p>
+
+                    </div>
+
+
+                    <button class="refresh-button"
+                            type="button"
+                            onclick="window.location.reload()">
+
+                        Refresh
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- ========================================= -->
+                <!-- USERS TABLE                              -->
+                <!-- ========================================= -->
+
+                <div class="users-table-wrapper">
+
+
+                    <table class="users-table">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    User
+                                </th>
+
+                                <th>
+                                    Account Type
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Password
+                                </th>
+
+                                <th class="actions-column">
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                            <!-- ================================= -->
+                            <!-- USER ROW                          -->
+                            <!-- ================================= -->
+
+                            <tr th:each="user : ${users}">
+
+
+                                <!-- USER -->
+
+                                <td>
+
+                                    <div class="user-identity">
+
+
+                                        <!--
+                                            Temporary avatar.
+
+                                            Later this can be replaced
+                                            with a profile picture.
+                                        -->
+
+                                        <div class="user-avatar"
+                                             th:text="${#strings.substring(user.username, 0, 1).toUpperCase()}">
+
+                                            U
+
+                                        </div>
+
+
+                                        <div class="user-details">
+
+
+                                            <strong th:text="${user.username}">
+                                                Username
+                                            </strong>
+
+
+                                            <span th:if="${user.fullName != null
+                                                        and !user.fullName.isBlank()}"
+                                                  th:text="${user.fullName}">
+
+                                                Full Name
+
+                                            </span>
+
+
+                                            <span th:if="${user.fullName == null
+                                                        or user.fullName.isBlank()}"
+                                                  class="muted">
+
+                                                No full name
+
+                                            </span>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- ACCOUNT TYPE -->
+
+                                <td>
+
+                                    <span class="account-type"
+                                          th:classappend="${user.administrator}
+                                          ? ' administrator'
+                                          : ' standard'"
+
+                                          th:text="${user.administrator}
+                                          ? 'Administrator'
+                                          : 'Standard User'">
+
+                                        Standard User
+
+                                    </span>
+
+                                </td>
+
+
+
+                                <!-- STATUS -->
+
+                                <td>
+
+
+                                    <span class="user-status"
+                                          th:classappend="${user.enabled}
+                                          ? ' enabled'
+                                          : ' disabled'">
+
+
+                                        <span class="user-status-dot">
+                                        </span>
+
+
+                                        <span th:text="${user.enabled}
+                                              ? 'Enabled'
+                                              : 'Disabled'">
+
+                                            Enabled
+
+                                        </span>
+
+
+                                    </span>
+
+
+                                </td>
+
+
+
+                                <!-- PASSWORD -->
+
+                                <td>
+
+
+                                    <div class="password-info">
+
+
+                                        <span th:if="${user.passwordRequired}">
+                                            Password required
+                                        </span>
+
+
+                                        <span th:unless="${user.passwordRequired}"
+                                              class="warning-text">
+                                            Password not required
+                                        </span>
+
+
+                                        <small th:if="${user.passwordExpires}">
+                                            Password expires
+                                        </small>
+
+
+                                        <small th:unless="${user.passwordExpires}">
+                                            Password does not expire
+                                        </small>
+
+
+                                    </div>
+
+
+                                </td>
+
+
+
+                                <!-- ACTIONS -->
+
+                                <td class="actions-column">
+
+
+                                    <a th:href="@{/users/{username}(username=${user.username})}"
+									   class="button-primary">
+									    Manage
+									</a>
+
+
+                                </td>
+
+
+                            </tr>
+
+
+
+                            <!-- ================================= -->
+                            <!-- NO USERS                          -->
+                            <!-- ================================= -->
+
+                            <tr th:if="${users == null or users.isEmpty()}">
+
+
+                                <td colspan="5"
+                                    class="empty-users">
+
+                                    No local Windows users were found.
+
+                                </td>
+
+
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </section>
+</div>
+</body>
+</html>

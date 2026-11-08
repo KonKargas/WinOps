@@ -1,0 +1,946 @@
+/* =========================================================
+   NETWORK PAGE
+   WinOps Manager
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.network-page-heading {
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   ADAPTER SELECTION BAR
+   ========================================================= */
+
+.network-adapter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 16px;
+
+    padding: 16px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.network-adapter-heading {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.network-adapter-label {
+    color: #2563eb;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.network-adapter-heading strong {
+    color: #111827;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.network-adapter-heading > span:last-child {
+    color: #64748b;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.network-adapter-form {
+    min-width: 260px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.network-adapter-form label {
+    flex-shrink: 0;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.network-select {
+    width: 100%;
+    min-height: 38px;
+
+    padding: 0 11px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    cursor: pointer;
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.network-select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   NETWORK OVERVIEW
+   ========================================================= */
+
+.network-overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+
+.network-stat-card {
+    min-height: 118px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 19px 21px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.network-stat-label {
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+
+.network-stat-card > strong,
+.network-status-value strong {
+    color: #111827;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+.network-stat-card small {
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   CONNECTION STATUS
+   ========================================================= */
+
+.network-status-value {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.network-status-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #94a3b8;
+}
+
+
+.network-status-online {
+    background: #22c55e;
+}
+
+
+.network-status-offline {
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   MAIN NETWORK GRID
+   ========================================================= */
+
+.network-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    align-items: start;
+}
+
+
+.network-column {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   NETWORK CARD
+   ========================================================= */
+
+.network-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+.network-card-header {
+    padding: 20px 22px 17px;
+
+    background: #fafbfc;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.network-card-header h2 {
+    margin-top: 3px;
+
+    color: #111827;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.network-card-header p {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+.network-card-content {
+    padding: 4px 22px;
+}
+
+
+/* =========================================================
+   INFORMATION ROW
+   ========================================================= */
+
+.network-info-row {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.network-info-row:last-child {
+    border-bottom: none;
+}
+
+
+.network-info-description {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.network-info-description strong {
+    color: #1f2937;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.network-info-description span {
+    color: #64748b;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+.network-info-value {
+    max-width: 55%;
+
+    color: #111827;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-align: right;
+
+    word-break: break-word;
+}
+
+
+.network-monospace {
+    font-family:
+        "Cascadia Code",
+        "Consolas",
+        monospace;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   COMING SOON
+   ========================================================= */
+
+.network-coming-soon {
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 18px 0;
+}
+
+
+.network-coming-soon strong {
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.network-coming-soon span {
+    max-width: 440px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.network-empty-state {
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+
+.network-empty-state strong {
+    color: #1f2937;
+
+    font-size: 14px;
+}
+
+
+.network-empty-state span {
+    max-width: 420px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   NETWORK CONFIGURATION
+   ========================================================= */
+
+.network-configuration-status {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.network-configuration-status > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.network-configuration-status strong {
+    color: #1f2937;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.network-configuration-status > div span {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+
+.network-mode-badge {
+    min-width: 66px;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-align: center;
+
+    letter-spacing: 0.05em;
+}
+
+
+.network-mode-dhcp {
+    background: #eff6ff;
+    color: #1d4ed8;
+
+    border: 1px solid #bfdbfe;
+}
+
+
+.network-mode-static {
+    background: #f8fafc;
+    color: #475569;
+
+    border: 1px solid #cbd5e1;
+}
+
+
+/* =========================================================
+   SETTING BLOCK
+   ========================================================= */
+
+.network-setting-block {
+    padding: 18px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.network-setting-block:last-child {
+    border-bottom: none;
+}
+
+
+.network-setting-heading {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-bottom: 14px;
+}
+
+
+.network-setting-heading strong {
+    color: #1f2937;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+.network-setting-heading span {
+    max-width: 460px;
+
+    color: #64748b;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   STATIC IPV4 FORM
+   ========================================================= */
+
+.network-static-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+
+.network-form-field {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.network-form-field label {
+    color: #475569;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.network-input {
+    width: 100%;
+    min-height: 38px;
+
+    padding: 0 11px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.network-input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+.network-static-actions {
+    grid-column: 1 / -1;
+
+    padding-top: 3px;
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+.network-success-message,
+.network-error-message {
+    margin-top: 12px;
+
+    padding: 9px 11px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.network-success-message {
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+
+    color: #166534;
+}
+
+
+.network-error-message {
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+}
+
+
+.network-setting-block button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.5;
+}
+
+/* =========================================================
+   NETWORK ACTIONS
+   ========================================================= */
+
+.network-action-row {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #eef2f7;
+}
+
+
+.network-action-row:last-of-type {
+    border-bottom: none;
+}
+
+
+.network-action-information {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.network-action-information strong {
+    color: #1f2937;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.network-action-information span {
+    max-width: 420px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+.network-action-row form {
+    flex-shrink: 0;
+}
+
+
+.network-action-row .button-primary,
+.network-action-row .button-secondary,
+.network-danger-button {
+    min-width: 96px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DANGER BUTTON
+   ========================================================= */
+
+.network-danger-button {
+    min-height: 37px;
+
+    padding: 0 15px;
+
+    border: 1px solid #ef4444;
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #dc2626;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+
+.network-danger-button:hover {
+    background: #fef2f2;
+
+    border-color: #dc2626;
+
+    color: #b91c1c;
+}
+
+
+.network-action-row button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.45;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .network-overview {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .network-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .network-adapter-bar {
+        align-items: stretch;
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+
+    .network-adapter-form {
+        width: 100%;
+        min-width: 0;
+
+        align-items: stretch;
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+
+    .network-overview {
+        grid-template-columns: 1fr;
+    }
+
+
+    .network-info-row {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+
+    .network-info-value {
+        max-width: 100%;
+
+        text-align: left;
+    }
+    
+    .network-static-form {
+	    grid-template-columns: 1fr;
+	}
+	
+	
+	.network-static-actions,
+	.network-static-actions .button-primary {
+	    width: 100%;
+	}
+	
+	.network-action-row {
+	    align-items: flex-start;
+	    flex-direction: column;
+	
+	    gap: 12px;
+	}
+	
+	
+	.network-action-row form,
+	.network-action-row .button-primary,
+	.network-action-row .button-secondary,
+	.network-action-row .network-danger-button {
+	    width: 100%;
+	}
+}
+/* =========================================================
+   NETWORK DIAGNOSTIC TOOLS
+   ========================================================= */
+.network-diagnostic-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+.network-diagnostic-info { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.network-diagnostic-info strong { color: #1f2937; font-size: 11px; }
+.network-diagnostic-info span { color: #64748b; font-size: 10px; line-height: 1.5; }
+.network-diagnostic-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.network-diagnostic-controls input {
+    width: 155px; min-height: 33px; padding: 7px 10px;
+    border: 1px solid #cbd5e1; border-radius: 6px; font-size: 11px;
+}
+.network-diagnostic-controls button, .network-diagnostic-output-heading button {
+    min-height: 33px; padding: 7px 13px; border: 0; border-radius: 6px;
+    background: #2563eb; color: #fff; font-size: 10px; font-weight: 700; cursor: pointer;
+}
+.network-diagnostic-controls button:disabled { opacity: .55; cursor: wait; }
+.network-diagnostic-output { margin-top: 16px; border: 1px solid #dbeafe; border-radius: 8px; background: #f8fafc; overflow: hidden; }
+.network-diagnostic-output[hidden] { display: none; }
+.network-diagnostic-output-heading { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #e2e8f0; }
+.network-diagnostic-output-heading strong { font-size: 11px; }
+.network-diagnostic-output-heading button { min-height: 27px; background: #475569; }
+.network-diagnostic-output pre { padding: 13px; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 340px; overflow-y: auto; font-size: 11px; line-height: 1.5; color: #1e293b; }
+.network-diagnostic-output.diagnostic-error pre { color: #b91c1c; }
+@media (max-width: 700px) {
+    .network-diagnostic-row { align-items: stretch; flex-direction: column; }
+    .network-diagnostic-controls { flex-wrap: wrap; }
+    .network-diagnostic-controls input { flex: 1; min-width: 130px; }
+}
+
+/* Background network adapter discovery */
+.network-loading-notice {
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(90, 150, 255, 0.35);
+    border-radius: 10px;
+    background: rgba(90, 150, 255, 0.08);
+    font-size: 0.9rem;
+}
+.network-loading-notice span {
+    display: block;
+    opacity: 0.75;
+    margin-top: 4px;
+}
